@@ -25,6 +25,7 @@ class FormView extends StatefulWidget {
 }
 
 class _FormViewState extends State<FormView> {
+  File? selectedImage;
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
   @override
@@ -87,7 +88,25 @@ class _FormViewState extends State<FormView> {
                 //     onTap: () async {
                 //       await chooseImage();
                 //     },
-                //     child: Container(
+                //     child: selectedImage != null
+                //         ? Container(
+                //         width: size.width * 0.84,
+                //         height: size.height * 0.2,
+                //         decoration: ShapeDecoration(
+                //           color: Color(0xFFF4FCF7),
+                //           shape: RoundedRectangleBorder(
+                //               borderRadius: BorderRadius.circular(7)),
+                //           shadows: [
+                //             BoxShadow(
+                //               color: Color(0x28000000),
+                //               blurRadius: 43,
+                //               offset: Offset(-2, 11),
+                //               spreadRadius: 0,
+                //             )
+                //           ],
+                //         ),
+                //         child: Image.file(selectedImage!)) // Show the picked image
+                //         :Container(
                 //       child: Center(
                 //         child: IconButton(
                 //           iconSize: 44,
@@ -241,6 +260,9 @@ class _FormViewState extends State<FormView> {
       );
       return false;
     } else {
+      setState(() {
+        selectedImage = File(pickedFile.path);
+      });
       File file = File(pickedFile!.path);
       // uploadFile(file, context, progController, id);
       return true;

@@ -3,6 +3,7 @@ import 'package:frontend/auth/form.dart';
 import 'package:frontend/auth/roles.dart';
 import 'package:frontend/controllers/polygon_controller.dart';
 import 'package:frontend/controllers/user_controller.dart';
+import 'package:frontend/views/classifier/disease.dart';
 import 'package:frontend/views/home/homepage.dart';
 import 'package:frontend/views/polygon/polygon.dart';
 
@@ -31,9 +32,7 @@ class Navigation extends StatelessWidget {
                   return Homepage();
                 },
               ),
-              Container(
-                color: Colors.blue,
-              ),
+              DiseaseView(),
               Container(
                 color: Colors.blue,
               ),
@@ -72,7 +71,7 @@ class Navigation extends StatelessWidget {
                   ),
                   GButton(
                     icon: LineIcons.pollH,
-                    text: 'Network',
+                    text: 'Detector',
                   ),
                   GButton(
                     icon: LineIcons.bell,
