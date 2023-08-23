@@ -30,7 +30,7 @@ TextStyle sub1 = TextStyle(
 
 );
 
-TextStyle h1 = const TextStyle(
+TextStyle h1 = TextStyle(
   color: Colors.black,
   fontSize: 22,
   fontFamily: 'Gilroy',
