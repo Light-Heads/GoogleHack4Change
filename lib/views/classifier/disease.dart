@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/controllers/auth_controller.dart';
+import 'package:frontend/controllers/disease_controller.dart';
+import 'package:frontend/controllers/location_controller.dart';
 import 'package:frontend/pallete.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -9,6 +11,7 @@ import '../../theme.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
 XFile? image;
+
 class DiseaseView extends StatefulWidget {
   const DiseaseView({
     Key? key,
@@ -19,7 +22,6 @@ class DiseaseView extends StatefulWidget {
 }
 
 class _DiseaseViewState extends State<DiseaseView> {
-
   late ValueNotifier<double> valueNotifier;
 
   @override
@@ -27,7 +29,9 @@ class _DiseaseViewState extends State<DiseaseView> {
     super.initState();
     valueNotifier = ValueNotifier(0.0);
   }
+
   File? selectedImage;
+  var disease = Get.put(DiseaseController());
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
   @override
@@ -77,93 +81,120 @@ class _DiseaseViewState extends State<DiseaseView> {
                   alignment: Alignment.center,
                   child: InkWell(
                     onTap: () async {
-                      await chooseImage();
+                      await chooseImage(disease);
                     },
                     child: selectedImage != null
                         ? Container(
-                        width: size.width * 0.84,
-                        height: size.height * 0.2,
-                        decoration: ShapeDecoration(
-                          color: Color(0xFFF4FCF7),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7)),
-                          shadows: [
-                            BoxShadow(
-                              color: Color(0x28000000),
-                              blurRadius: 43,
-                              offset: Offset(-2, 11),
-                              spreadRadius: 0,
-                            )
-                          ],
-                        ),
-                        child: Image.file(selectedImage!)) // Show the picked image
-                        :Container(
-                      child: Center(
-                        child: IconButton(
-                          iconSize: 44,
-                          icon: Icon(
-                            LineIcons.camera,
-                            color: Pallete.greenColor,
+                            width: size.width * 0.84,
+                            height: size.height * 0.2,
+                            decoration: ShapeDecoration(
+                              color: Color(0xFFF4FCF7),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(7)),
+                              shadows: [
+                                BoxShadow(
+                                  color: Color(0x28000000),
+                                  blurRadius: 43,
+                                  offset: Offset(-2, 11),
+                                  spreadRadius: 0,
+                                )
+                              ],
+                            ),
+                            child: Image.file(
+                                selectedImage!)) // Show the picked image
+                        : Container(
+                            child: Center(
+                              child: IconButton(
+                                iconSize: 44,
+                                icon: Icon(
+                                  LineIcons.camera,
+                                  color: Pallete.greenColor,
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                            width: size.width * 0.84,
+                            height: size.height * 0.2,
+                            decoration: ShapeDecoration(
+                              color: Color(0xFFF4FCF7),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(7)),
+                              shadows: [
+                                BoxShadow(
+                                  color: Color(0x28000000),
+                                  blurRadius: 43,
+                                  offset: Offset(-2, 11),
+                                  spreadRadius: 0,
+                                )
+                              ],
+                            ),
                           ),
-                          onPressed: () {},
-                        ),
-                      ),
-                      width: size.width * 0.84,
-                      height: size.height * 0.2,
-                      decoration: ShapeDecoration(
-                        color: Color(0xFFF4FCF7),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(7)),
-                        shadows: [
-                          BoxShadow(
-                            color: Color(0x28000000),
-                            blurRadius: 43,
-                            offset: Offset(-2, 11),
-                            spreadRadius: 0,
-                          )
-                        ],
-                      ),
-                    ),
                   ),
                 ),
-
-                selectedImage != null ?
-                Padding(
-                  padding: const EdgeInsets.all(28.0),
-                  child: SizedBox(
-                    height: size.height*0.5,
-                    width: size.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Data", style: h1.copyWith(fontSize: 28, color: Pallete.greenColor),),
-                        Text("Predicted Plant Name", style: h1.copyWith(fontSize: 18, fontWeight: FontWeight.w600) ,),
-                        Text("Tomato Healty"),
-                        Row(
-                          children: [
-                            Text("Accuracy : ",style: h1.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
-                            SizedBox(width: size.width*0.12,),
-                            SimpleCircularProgressBar(
-                              animationDuration: 2,
-                              valueNotifier: valueNotifier,
-                              maxValue: 100,
-                              mergeMode: false,
-                              onGetText: (double value) {
-                                return Text('${value.toInt()}%');
-                              },
-                            ),
-
-                          ],
-                        ),
-                        Text("Solution:", style: h1.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
-                        Text("You can just chill cause its healthy"),
-                      ],
-                    ),
-                  ),
-                ) : SizedBox()
-
-
+                selectedImage != null
+                    ? Obx(
+                        () => (disease.isLoading.value)
+                            ? Center(child: CircularProgressIndicator())
+                            : Padding(
+                                padding: const EdgeInsets.all(28.0),
+                                child: SizedBox(
+                                  height: size.height * 0.5,
+                                  width: size.width,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Disease Name",
+                                        style: h1.copyWith(
+                                            fontSize: 28,
+                                            color: Pallete.greenColor),
+                                      ),
+                                      Text(
+                                        disease.disease.value.name ?? "",
+                                        style: h1.copyWith(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("Accuracy : ",
+                                              style: h1.copyWith(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w600)),
+                                          SizedBox(
+                                            width: size.width * 0.12,
+                                          ),
+                                          SimpleCircularProgressBar(
+                                            animationDuration: 2,
+                                            valueNotifier: valueNotifier,
+                                            maxValue: 100,
+                                            mergeMode: false,
+                                            onGetText: (double value) {
+                                              return Text('${value.toInt()}%');
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      Text("Solution:",
+                                          style: h1.copyWith(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600)),
+                                      Container(
+                                        width: size.width * 0.8,
+                                        height: size.width * 0.6,
+                                        child: Text(
+                                            disease.disease.value.soln ??
+                                                ""),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                      )
+                    : SizedBox()
               ],
             ),
           ),
@@ -191,10 +222,10 @@ class _DiseaseViewState extends State<DiseaseView> {
     );
   }
 
-  Future<bool> chooseImage() async {
+  Future<bool> chooseImage(DiseaseController diseaseController) async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
-    await picker.pickImage(source: ImageSource.gallery);
+        await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile == null) {
       showDialog(
@@ -228,8 +259,9 @@ class _DiseaseViewState extends State<DiseaseView> {
       setState(() {
         selectedImage = File(pickedFile.path);
       });
-      File file = File(pickedFile!.path);
-      // uploadFile(file, context, progController, id);
+      File file = File(pickedFile.path);
+      await diseaseController.getDisease(file, context);
+      valueNotifier.value = diseaseController.disease.value.accuracy!;
       return true;
     }
   }

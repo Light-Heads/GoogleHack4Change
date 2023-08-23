@@ -32,11 +32,14 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:frontend/controllers/auth_controller.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 
 import '../../pallete.dart';
 import '../../theme.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -47,6 +50,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    var auth = Get.put(AuthController());
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -69,12 +73,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Padding(
                         padding: const EdgeInsets.only(right: 28.0),
                         child: IconButton(onPressed: (){
+                            auth.signOut();
+                          },
                           // Navigator.push(
                           //   context,
                           //   MaterialPageRoute(builder: (context) => Settings()),
                           // );
-
-                        }, icon: Icon(Icons.logout, size: 30,)),
+                            icon:Icon(Icons.logout, size: 30,)),
                       )
 
                     ],
@@ -93,12 +98,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.only(left: 28.0),
                 child: Text("Farmer", style: sub1.copyWith(fontSize: 18, fontWeight: FontWeight.w600, color: Pallete.greenColor),),
               ),
-
-              
-
-
-
-
           ]
       ),
     ),
@@ -106,28 +105,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-
-  Widget _buildSectionTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Text(
-        title,
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildQuoteItem(String title, String subTitle, IconData icon) {
-    return ListTile(
-      leading: Icon(icon),
-      title: Text(title),
-      subtitle: Text(subTitle),
-    );
-  }
-
+Widget _buildQuoteItem(String title, String subTitle, IconData icon) {
+  return ListTile(
+    leading: Icon(icon),
+    title: Text(title),
+    subtitle: Text(subTitle),
+  );
+}
 
 class TabBarScreen extends StatelessWidget {
   @override
