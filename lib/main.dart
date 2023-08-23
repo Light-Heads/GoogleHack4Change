@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
     var user = Get.put(UserController());
     Get.put(LocationController());
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: AppTheme.theme,
-        home: StreamBuilder(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: AppTheme.theme,
+      home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
