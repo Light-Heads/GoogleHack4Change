@@ -1,10 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/pallete.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../core/buttons.dart';
 import '../theme.dart';
-
+import 'package:image_picker/image_picker.dart';
 class FormView extends StatefulWidget {
   const FormView({Key? key}) : super(key: key);
 
@@ -14,6 +16,7 @@ class FormView extends StatefulWidget {
 
 class _FormViewState extends State<FormView> {
   TextEditingController _usernameController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -54,6 +57,9 @@ class _FormViewState extends State<FormView> {
                 Align(
                   alignment: Alignment.center,
                   child: InkWell(
+                    onTap: () async {
+                      await chooseImage();
+                    },
                     child: Container(
                       child: Center(
                         child: IconButton(
@@ -97,14 +103,31 @@ class _FormViewState extends State<FormView> {
                           ),
                         ),
                       ),
+                      SizedBox(height: size.height*0.02,),
+                      TextFormField(
+                        keyboardType: TextInputType.phone,
+                        controller: _phoneController,
+                        validator: PhoneNumberValidator.validate,
+                        decoration: InputDecoration(
+                          focusColor: Pallete.greenColor,
+                          fillColor: Pallete.greenColor,
+
+                          labelText: 'Phone Number',
+                          prefixIcon: Icon(Icons.phone),
+                          border: OutlineInputBorder(
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(height: size.height*0.02,),
 
+
                 Align(
                   alignment: Alignment.center,
                     child: InkWell(
+                      onTap: (){},
                         child: Button(size, "Next"))),
               ],
             ),
@@ -114,9 +137,82 @@ class _FormViewState extends State<FormView> {
     );
   }
 
+  showLoaderDialog(BuildContext context){
+    AlertDialog alert=AlertDialog(
+      content: new Row(
+        children: [
+          CircularProgressIndicator(),
+          Container(margin: EdgeInsets.only(left: 7),child:Text("Uploading..." )),
+        ],),
+    );
+    showDialog(barrierDismissible: false,
+      context:context,
+      builder:(BuildContext context){
+        return alert;
+      },
+    );
+  }
+
+  Future<bool> chooseImage() async {
+
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile == null) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            actions: [
+              TextButton(
+                child: const Text('Ok'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+            content: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.5,
+              height: MediaQuery.of(context).size.height * 0.1,
+              child: Column(
+                children: const [
+                  Text(
+                    'No File choosen',
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+      return false;
+    } else {
+      File file = File(pickedFile!.path);
+      // uploadFile(file, context, progController, id);
+      return true;
+    }
+  }
   @override
   void dispose() {
     _usernameController.dispose();
     super.dispose();
   }
 }
+
+class PhoneNumberValidator {
+  static String? validate(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Phone number is required';
+    }
+
+    final cleanedValue = value.replaceAll(RegExp(r'\D'), '');
+
+    if (cleanedValue.length < 10) {
+      return 'Phone number must be at least 10 digits';
+    }
+
+    return null; // Validation passed
+  }
+}
+
+
