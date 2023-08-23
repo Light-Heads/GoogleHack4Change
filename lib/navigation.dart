@@ -33,7 +33,9 @@ class Navigation extends StatelessWidget {
                 Container(
                   color: Colors.blue,
                 ),
-                PolygonScreen(),
+                Container(
+                  color: Colors.red,
+                ),
                 ProfileView(),
               ],
             ),

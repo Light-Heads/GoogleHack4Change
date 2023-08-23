@@ -6,6 +6,7 @@ import 'package:frontend/controllers/weather_controller.dart';
 import 'package:frontend/core/buttons.dart';
 import 'package:frontend/pallete.dart';
 import 'package:frontend/theme.dart';
+import 'package:frontend/views/weather/weather_detail.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -147,6 +148,10 @@ class _HomepageState extends State<Homepage> {
                                           padding: EdgeInsets.only(right: 18.0),
                                           child: InkWell(
                                               onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(builder: (context) => WeatherDetail()),
+                                                );
                                               },
                                               child: Button(size, "View More")),
                                         ),
