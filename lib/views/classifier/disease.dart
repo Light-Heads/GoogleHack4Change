@@ -1,15 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:frontend/controllers/auth_controller.dart';
 import 'package:frontend/pallete.dart';
-import 'package:frontend/views/polygon/polygon.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../theme.dart';
-
+import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
 XFile? image;
 class DiseaseView extends StatefulWidget {
@@ -22,11 +19,20 @@ class DiseaseView extends StatefulWidget {
 }
 
 class _DiseaseViewState extends State<DiseaseView> {
+
+  late ValueNotifier<double> valueNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+    valueNotifier = ValueNotifier(0.0);
+  }
   File? selectedImage;
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    valueNotifier.value = 64;
     var size = MediaQuery.of(context).size;
     var auth = Get.put(AuthController());
     return Scaffold(
@@ -120,6 +126,44 @@ class _DiseaseViewState extends State<DiseaseView> {
                     ),
                   ),
                 ),
+
+                selectedImage != null ?
+                Padding(
+                  padding: const EdgeInsets.all(28.0),
+                  child: SizedBox(
+                    height: size.height*0.34,
+                    width: size.width,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Data", style: h1.copyWith(fontSize: 28, color: Pallete.greenColor),),
+                        Text("Predicted Plant Name", style: h1.copyWith(fontSize: 18, fontWeight: FontWeight.w600) ,),
+                        Text("Tomato Healty"),
+                        Row(
+                          children: [
+                            Text("Accuracy : ",style: h1.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
+                            SizedBox(width: size.width*0.12,),
+                            SimpleCircularProgressBar(
+                              animationDuration: 2,
+                              valueNotifier: valueNotifier,
+                              maxValue: 100,
+                              mergeMode: false,
+                              onGetText: (double value) {
+                                return Text('${value.toInt()}%');
+                              },
+                            ),
+
+                          ],
+                        ),
+                        Text("Solution:", style: h1.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
+                        Text("You can just chill cause its healthy"),
+                      ],
+                    ),
+                  ),
+                ) : SizedBox()
+
+
               ],
             ),
           ),

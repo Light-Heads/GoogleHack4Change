@@ -46,6 +46,7 @@ dependencies:
   line_icons: ^2.0.3
   logger: ^2.0.1
   permission_handler: ^10.4.3
+  simple_circular_progress_bar: ^1.0.2
   tflite_flutter: ^0.10.1
   tflite_flutter_helper_plus: ^0.0.2
 
