@@ -38,6 +38,7 @@ dependencies:
   geocoding: ^2.1.0
   geolocator: ^10.0.0
   get: null
+  google_fonts: ^5.1.0
   google_maps_flutter: ^2.4.0
   google_nav_bar: ^5.0.6
   google_sign_in: ^6.1.4
