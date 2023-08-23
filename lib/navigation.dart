@@ -25,7 +25,9 @@ class Navigation extends StatelessWidget {
                 Container(
                   color: Colors.blue,
                 ),
-                FormView(),
+                Container(
+                  color: Colors.green,
+                ),
                 ProfileView(),
               ],
             ),

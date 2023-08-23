@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:frontend/config.dart';
+import 'package:frontend/models/weather.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:hack4changeprivate/config.dart';
-import 'package:hack4changeprivate/models/weather.dart';
+
 
 var dio = Dio();
 
