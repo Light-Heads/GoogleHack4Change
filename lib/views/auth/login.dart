@@ -50,25 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Pallete.secondaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          fixedSize: Size(size.width * 0.7, size.height * 0.07),
-                        ),
-                        onPressed: signInWithGoogle,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image.asset('assets/images/google_icon.png', height: 20, width: 20,	),
-
-                            const Text('Login with Google', style: TextStyle(fontWeight: FontWeight.bold),),
-
-                          ],
-                        ),
-                      ),
+              
               const Spacer(),
             ],
           ),

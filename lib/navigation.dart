@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/auth/form.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
-
 import 'controllers/nav_controller.dart';
+
 
 class Navigation extends StatelessWidget {
   final controller = Get.put(NavigationController());
@@ -22,9 +23,7 @@ class Navigation extends StatelessWidget {
                 Container(
                   color: Colors.blue,
                 ),
-                Container(
-                  color: Colors.red,
-                ),
+                FormView(),
                 Container(
                   color: Colors.blue,
                 )
