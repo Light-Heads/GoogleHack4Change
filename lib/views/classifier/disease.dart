@@ -138,7 +138,7 @@ class _DiseaseViewState extends State<DiseaseView> {
                             : Padding(
                                 padding: const EdgeInsets.all(28.0),
                                 child: SizedBox(
-                                  height: size.height * 0.34,
+                                  height: size.height * 0.5,
                                   width: size.width,
                                   child: Column(
                                     mainAxisAlignment:

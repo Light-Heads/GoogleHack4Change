@@ -162,9 +162,75 @@ class _HomepageState extends State<Homepage> {
                               ],
                             ),
                           ),
-                        )
+                        ),
+                        Container(
+                          width: size.width*0.9,
+                          height: size.height*0.4,
+                          decoration: ShapeDecoration(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            shadows: [
+                              BoxShadow(
+                                color: Color(0x3F000000),
+                                blurRadius: 34,
+                                offset: Offset(-2, 4),
+                                spreadRadius: 0,
+                              )
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(28.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Current Conditions", style: h1,),
+                                SizedBox(height: size.height*0.01,),
+                                Text("This data directly comes from satellite", style: sub1,)
+
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: size.height*0.03,),
+                        Container(
+                          child: Center(
+                            child: Text(
+                              'View More Insights',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22.96,
+                                fontFamily: 'Gilroy',
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -0.80,
+                              ),
+                            ),
+                          ),
+                          width: size.width*0.9,
+                          height: size.height*0.07,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                            color: Colors.white,
+                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/satelite.gif"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+
+
                       ],
                     ),
+
                   ),
                 ),
               );
