@@ -30,7 +30,7 @@ class _HomepageState extends State<Homepage> {
 
     return SafeArea(
       child: Scaffold(body: Obx(() {
-        return controller.isDataLoading.value
+        return (controller.isDataLoading.value || location.isDataLoading.value || weather.isDataLoading.value)
             ? const Center(child: CircularProgressIndicator())
             : Scaffold(
                 body: SafeArea(
@@ -94,7 +94,7 @@ class _HomepageState extends State<Homepage> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    '${weather.weather.value.main!.temp.toString()}°',
+                                                    '${weather.weather.value.main?.temp.toString()}°',
                                                     style: const TextStyle(
                                                       color: Colors.black,
                                                       fontSize: 37,

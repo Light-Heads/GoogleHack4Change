@@ -14,11 +14,14 @@ class WeatherController extends GetxController {
   var isDataLoading = false.obs;
   getCurrentWeatherData(Position position) async {
     try {
+      isDataLoading.value = true;
       var res = await dio.get(
           'https://api.agromonitoring.com/agro/1.0/weather?lat=${position.latitude}&lon=${position.longitude}&appid=$agroMonitoringAPIKey');
       weather.value = WeatherModel.fromJson(res.data);      
     } catch (e) {
       print(e);
+    }finally{
+      isDataLoading.value = false;
     }
   }
 

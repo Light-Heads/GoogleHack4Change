@@ -59,18 +59,22 @@ class _CommodityViewState extends State<CommodityView> {
                     ],
                   ),
                 ),
-                SizedBox(
-                    height: size.height*0.7,
-                    width: size.width,
-                    child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
-                        itemCount: commodity.commodity.value.records!.length,
-                        itemBuilder: (context, i){
-                          return Padding(
-                            padding: const EdgeInsets.all(18.0),
-                            child: CommodityCard(size, commodity.commodity.value.records![i]),
-                          );
-                        })
+                Obx(() =>
+                  (commodity.isDataLoading.value)?
+                  Center(child: CircularProgressIndicator()):
+                  SizedBox(
+                      height: size.height*0.7,
+                      width: size.width,
+                      child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          itemCount: commodity.commodity.value.records!.length,
+                          itemBuilder: (context, i){
+                            return Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: CommodityCard(size, commodity.commodity.value.records![i]),
+                            );
+                          })
+                  ),
                 ),
               ],
             ),
