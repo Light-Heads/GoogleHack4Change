@@ -6,7 +6,9 @@ import '../core/buttons.dart';
 import '../theme.dart';
 
 class FormView extends StatefulWidget {
-  const FormView({Key? key}) : super(key: key);
+  final int roleid;
+  const FormView({Key? key, required this.roleid,}) : super(key: key);
+  
 
   @override
   State<FormView> createState() => _FormViewState();
@@ -14,6 +16,7 @@ class FormView extends StatefulWidget {
 
 class _FormViewState extends State<FormView> {
   TextEditingController _usernameController = TextEditingController();
+  TextEditingController numberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -32,7 +35,7 @@ class _FormViewState extends State<FormView> {
                       padding: const EdgeInsets.only(left: 28.0, top: 20),
                       child: IconButton(
                         onPressed: (){
-                          // Navigator.pop(context);
+                          Navigator.pop(context);
                         },
                         icon: Icon(Icons.arrow_back, size: 30,color: Colors.black,),
                       )
@@ -101,11 +104,17 @@ class _FormViewState extends State<FormView> {
                   ),
                 ),
                 SizedBox(height: size.height*0.02,),
+                
 
-                Align(
-                  alignment: Alignment.center,
-                    child: InkWell(
-                        child: Button(size, "Next"))),
+                GestureDetector(
+                  onTap: (){
+
+                  },
+                  child: Align(
+                    alignment: Alignment.center,
+                      child: InkWell(
+                          child: Button(size, "Next"))),
+                ),
               ],
             ),
           ),
