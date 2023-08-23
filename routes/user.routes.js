@@ -9,6 +9,7 @@ router.route('/addUser').post(userController.addUser);
 router.route('/getUser/:userid').get(userController.getUser);
 router.route('/work').post(workerController.addWork);
 router.route('/work').get(workerController.getWork);
+router.route('/getWorkById/:workid').get(workerController.getWorkById);
 router.route('/work').delete(workerController.deleteWork);
 router.route('/products').get(productController.getProducts);
 

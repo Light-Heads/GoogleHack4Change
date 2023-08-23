@@ -79,7 +79,7 @@ class workerController {
     }
     static async getWorkById(req, res, next) {
         try{
-            const { id } = req.body.userId;
+            const { id } = req.params.workid;
             const work = await Work.findById(id);
             res.status(200).send({ work: work });
         }
