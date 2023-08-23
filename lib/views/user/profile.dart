@@ -35,6 +35,7 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 
+import '../../pallete.dart';
 import '../../theme.dart';
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -51,35 +52,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: SafeArea(
         child: Center(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-            Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 28.0, top: 20),
-                  child: Text(
-                    "PROFILE",
-                    style: h1.copyWith(fontWeight: FontWeight.w600),
+            Padding(
+              padding: const EdgeInsets.all(28.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Profile",
+                        style: h1.copyWith(fontSize: 34, color: Colors.black),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 28.0),
+                        child: IconButton(onPressed: (){
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => Settings()),
+                          // );
+
+                        }, icon: Icon(Icons.logout, size: 30,)),
+                      )
+
+                    ],
                   ),
-                ),
+                ],
               ),
+            ),
+              // CircleAvatar(radius: 50,),
+              SizedBox(height: size.height*0.02,),
               Padding(
-                padding: const EdgeInsets.only(right: 28.0, top: 20),
-                child: IconButton(onPressed: (){
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => Settings()),
-                  // );
-
-                }, icon: Icon(LineIcons.cog, size: 30,)),
-              )
-            ],
-          ),
-
-              CircleAvatar(radius: 50,),
-              Text("Your Name"),
+                padding: const EdgeInsets.only(left: 28.0),
+                child: Text("Your Name", style: sub1.copyWith(fontSize: 22, fontWeight: FontWeight.w600),),
+              ),
+              SizedBox(height: size.height*0.02,),
+              Padding(
+                padding: const EdgeInsets.only(left: 28.0),
+                child: Text("Farmer", style: sub1.copyWith(fontSize: 18, fontWeight: FontWeight.w600, color: Pallete.greenColor),),
+              ),
 
               
 
