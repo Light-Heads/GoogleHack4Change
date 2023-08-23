@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "337158725624-8kiguufdo1rvipccio33reptdv5u0jre.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.frontend",
+            "certificate_hash": "9dd0a9a4895a13283054131e536ed3c474ee433c"
+          }
+        },
+        {
+          "client_id": "337158725624-bgitpcn9dblcihrd58kr23pmko49oo12.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.frontend",
+            "certificate_hash": "74cb4f22db4800fdcbf955cf1930d50eaca440d4"
+          }
+        },
+        {
           "client_id": "337158725624-ditl5no8bmq8falcgnk1gglc9t50hbok.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -22,7 +38,7 @@
           }
         },
         {
-          "client_id": "337158725624-cvpmbdtbfe4sr6g30m523hahn09ujbj8.apps.googleusercontent.com",
+          "client_id": "337158725624-a3j4l7fod7qlgmmtoauk39n9t0q668ub.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -35,7 +51,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "337158725624-cvpmbdtbfe4sr6g30m523hahn09ujbj8.apps.googleusercontent.com",
+              "client_id": "337158725624-a3j4l7fod7qlgmmtoauk39n9t0q668ub.apps.googleusercontent.com",
               "client_type": 3
             },
             {
@@ -66,7 +82,7 @@
           }
         },
         {
-          "client_id": "337158725624-cvpmbdtbfe4sr6g30m523hahn09ujbj8.apps.googleusercontent.com",
+          "client_id": "337158725624-a3j4l7fod7qlgmmtoauk39n9t0q668ub.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -79,7 +95,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "337158725624-cvpmbdtbfe4sr6g30m523hahn09ujbj8.apps.googleusercontent.com",
+              "client_id": "337158725624-a3j4l7fod7qlgmmtoauk39n9t0q668ub.apps.googleusercontent.com",
               "client_type": 3
             },
             {
