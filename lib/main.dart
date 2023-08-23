@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/theme.dart';
@@ -21,7 +22,18 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: AppTheme.theme,
-      home: Navigation(), //LoginScreen()
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+        if(snapshot.hasData)
+        {
+          return Navigation();
+        }
+        else
+        {
+          return LoginScreen();
+        }
+      },)
     );
   }
 }
