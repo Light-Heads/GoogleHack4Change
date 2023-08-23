@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/controllers/auth_controller.dart';
+import 'package:frontend/pallete.dart';
+import 'package:frontend/theme.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,12 +14,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    var auth = Get.put(AuthController());
     var size = MediaQuery.of(context).size;
     return Container(
-      // color: Pallete.backgroundColor,
+      color: Pallete.backgroundColor,
       child: SafeArea(
         child: Scaffold(
-          // backgroundColor: Pallete.whiteColor,
+          backgroundColor: Pallete.whiteColor,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -33,15 +38,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Text(
                           'Welcome',
-                          // style: largeHeading,
+                          style: sub1,
                         ),
                         Text(
                           'You have been missed!',
-                          // style: largeHeading2,
+                          style: h1,
                         ),
                         Text(
                           'Login to explore options',
-                          // style: subHeading,
+                          style: h1,
                         ),
                         const Spacer(),
                         
@@ -50,7 +55,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              
+              ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Pallete.greenColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          fixedSize: Size(size.width * 0.7, size.height * 0.07),
+                        ),
+                        onPressed: (){
+                          auth.signInWithGoogle(context);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset('assets/images/google_icon.png', height: 20, width: 20,	),
+
+                            const Text('Login with Google', style: TextStyle(fontWeight: FontWeight.bold),),
+
+                          ],
+                        ),
+                      ),
               const Spacer(),
             ],
           ),
