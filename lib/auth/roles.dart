@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../core/buttons.dart';
 import '../pallete.dart';
 import '../theme.dart';
 
@@ -23,7 +24,6 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Align(
@@ -50,26 +50,38 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                 ],
               ),
             ),
-            RoleContainer(
-              role: 1,
-              roleName: 'Farmer',
-              isSelected: selectedRole == 1,
-              onTap: () => _selectRole(1),
+            Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  RoleContainer(
+                    role: 1,
+                    roleName: 'Farmer',
+                    isSelected: selectedRole == 1,
+                    onTap: () => _selectRole(1), roleImageAsset: 'assets/images/farmer.png',
+                  ),
+                  SizedBox(height: 20),
+                  RoleContainer(
+                    role: 2,
+                    roleName: 'Worker',
+                    isSelected: selectedRole == 2,
+                    onTap: () => _selectRole(2), roleImageAsset: 'assets/images/worker.png',
+                  ),
+                  SizedBox(height: 20),
+                  RoleContainer(
+                    role: 3,
+                    roleName: 'Business',
+                    isSelected: selectedRole == 3,
+                    onTap: () => _selectRole(3), roleImageAsset: 'assets/images/business.png',
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 20),
-            RoleContainer(
-              role: 2,
-              roleName: 'Worker',
-              isSelected: selectedRole == 2,
-              onTap: () => _selectRole(2),
-            ),
-            SizedBox(height: 20),
-            RoleContainer(
-              role: 3,
-              roleName: 'Business',
-              isSelected: selectedRole == 3,
-              onTap: () => _selectRole(3),
-            ),
+            SizedBox(height: size.height*0.05,),
+            InkWell(
+              //implement next route here.
+                child: Center(child: Button(size, "Next"))),
+
           ],
         ),
       ),
@@ -78,6 +90,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
 }
 
 class RoleContainer extends StatelessWidget {
+  final String roleImageAsset;
   final int role;
   final String roleName;
   final bool isSelected;
@@ -87,16 +100,17 @@ class RoleContainer extends StatelessWidget {
     required this.role,
     required this.roleName,
     required this.isSelected,
-    required this.onTap,
+    required this.onTap, required this.roleImageAsset,
   });
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 200,
-        height: 100,
+        width: size.width*0.80,
+        height: size.height*0.1,
         decoration: BoxDecoration(
           color: isSelected ? Pallete.lightGreenColor: Colors.white,
           border: Border.all(
@@ -130,14 +144,26 @@ class RoleContainer extends StatelessWidget {
                     : null,
               ),
             ),
-            Center(
-              child: Text(
-                roleName,
-                style: TextStyle(
-                  color: isSelected ? Pallete.greenColor : Colors.black,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 55,
+                      width: 55,
+                      child: Image.asset(roleImageAsset,)),
+                  Text(
+                    roleName,
+                    style: TextStyle(
+                      color: isSelected ? Pallete.greenColor : Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(width: 10,)
+                ],
               ),
             ),
           ],
