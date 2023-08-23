@@ -35,12 +35,11 @@ class MyApp extends StatelessWidget {
                 future: user.getUser(snapshot.data!.uid),
                 builder: (context, userSnapshot) {
                   if (userSnapshot.connectionState == ConnectionState.waiting) {
-                    // While waiting for user data, you might want to show a loading indicator.
-                    return Scaffold(body: Center(child: CircularProgressIndicator()));
+                    return Scaffold(
+                        body: Center(child: CircularProgressIndicator()));
                   }
 
                   if (userSnapshot.hasError) {
-                    // Handle any errors that occurred during data retrieval.
                     return Text("Error fetching user data.");
                   }
 
