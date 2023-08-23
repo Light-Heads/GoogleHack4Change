@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/form.dart';
 import 'package:frontend/auth/roles.dart';
+import 'package:frontend/views/user/profile.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
@@ -25,7 +26,7 @@ class Navigation extends StatelessWidget {
                   color: Colors.blue,
                 ),
                 FormView(),
-                RoleSelectionScreen(),
+                ProfileView(),
               ],
             ),
           ),

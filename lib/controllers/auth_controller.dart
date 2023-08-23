@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/form.dart';
+import 'package:frontend/auth/roles.dart';
 import 'package:frontend/core/utils.dart';
 import 'package:frontend/navigation.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
   var auth = FirebaseAuth.instance;
+  User get user => auth.currentUser!;
+  Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -25,7 +28,7 @@ class AuthController extends GetxController {
 
         userCredential.additionalUserInfo!.isNewUser
             ? Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return FormView();
+                return RoleSelectionScreen();
               }))
             : Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return Navigation();
@@ -35,5 +38,9 @@ class AuthController extends GetxController {
       print(e);
       showSnackBar(context, e.toString());
     }
+  }
+
+  signOut() async {
+    await auth.signOut();
   }
 }
