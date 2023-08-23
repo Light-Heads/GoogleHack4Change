@@ -1,14 +1,24 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:frontend/controllers/auth_controller.dart';
 import 'package:frontend/pallete.dart';
+import 'package:frontend/views/polygon/polygon.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 
 import '../core/buttons.dart';
 import '../theme.dart';
 import 'package:image_picker/image_picker.dart';
+
+
+XFile? image;
 class FormView extends StatefulWidget {
-  const FormView({Key? key}) : super(key: key);
+  final int roleid;
+  const FormView({
+    Key? key,
+    required this.roleid,
+  }) : super(key: key);
 
   @override
   State<FormView> createState() => _FormViewState();
@@ -20,6 +30,7 @@ class _FormViewState extends State<FormView> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    var auth = Get.put(AuthController());
     return Scaffold(
       body: SafeArea(
         child: SizedBox(
@@ -34,76 +45,105 @@ class _FormViewState extends State<FormView> {
                   child: Padding(
                       padding: const EdgeInsets.only(left: 28.0, top: 20),
                       child: IconButton(
-                        onPressed: (){
-                          // Navigator.pop(context);
+                        onPressed: () {
+                          Navigator.pop(context);
                         },
-                        icon: Icon(Icons.arrow_back, size: 30,color: Colors.black,),
-                      )
-                  ),
+                        icon: Icon(
+                          Icons.arrow_back,
+                          size: 30,
+                          color: Colors.black,
+                        ),
+                      )),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(28.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Few More Steps", style: h1.copyWith(fontSize: 34, color: Colors.black),),
-                      Text("Your data helps us stay\nconnected", style: sub1,),
-                      SizedBox(height: size.height*0.03,),
-                      Text("Upload your profile picture", style: sub1.copyWith(fontSize: 16, fontWeight: FontWeight.w800, color: Pallete.greenColor),),
+                      Text(
+                        "Few More Steps",
+                        style: h1.copyWith(fontSize: 34, color: Colors.black),
+                      ),
+                      Text(
+                        "Your data helps us stay\nconnected",
+                        style: sub1,
+                      ),
+                      SizedBox(
+                        height: size.height * 0.03,
+                      ),
+                      // Text(
+                      //   "Upload your profile picture",
+                      //   style: sub1.copyWith(
+                      //       fontSize: 16,
+                      //       fontWeight: FontWeight.w800,
+                      //       color: Pallete.greenColor),
+                      // ),
                     ],
                   ),
                 ),
-
-                Align(
-                  alignment: Alignment.center,
-                  child: InkWell(
-                    onTap: () async {
-                      await chooseImage();
-                    },
-                    child: Container(
-                      child: Center(
-                        child: IconButton(
-                          iconSize: 44,
-                          icon: Icon(LineIcons.camera,color: Pallete.greenColor,), onPressed: () {  },
-                        ),
-                      ),
-                      width: size.width*0.84,
-                      height: size.height*0.2,
-                      decoration: ShapeDecoration(
-                        color: Color(0xFFF4FCF7),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
-                        shadows: [
-                          BoxShadow(
-                            color: Color(0x28000000),
-                            blurRadius: 43,
-                            offset: Offset(-2, 11),
-                            spreadRadius: 0,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // Align(
+                //   alignment: Alignment.center,
+                //   child: InkWell(
+                //     onTap: () async {
+                //       await chooseImage();
+                //     },
+                //     child: Container(
+                //       child: Center(
+                //         child: IconButton(
+                //           iconSize: 44,
+                //           icon: Icon(
+                //             LineIcons.camera,
+                //             color: Pallete.greenColor,
+                //           ),
+                //           onPressed: () {},
+                //         ),
+                //       ),
+                //       width: size.width * 0.84,
+                //       height: size.height * 0.2,
+                //       decoration: ShapeDecoration(
+                //         color: Color(0xFFF4FCF7),
+                //         shape: RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.circular(7)),
+                //         shadows: [
+                //           BoxShadow(
+                //             color: Color(0x28000000),
+                //             blurRadius: 43,
+                //             offset: Offset(-2, 11),
+                //             spreadRadius: 0,
+                //           )
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.all(28.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Enter your full name", style: sub1.copyWith(fontSize: 16, fontWeight: FontWeight.w800, color: Pallete.greenColor),),
-                      SizedBox(height: size.height*0.02,),
+                      Text(
+                        "Enter your full name",
+                        style: sub1.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: Pallete.greenColor),
+                      ),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
                       TextFormField(
                         controller: _usernameController,
                         decoration: InputDecoration(
                           focusColor: Pallete.greenColor,
                           fillColor: Pallete.greenColor,
-
                           labelText: 'Full Name',
                           prefixIcon: Icon(Icons.person_outline),
-                          border: OutlineInputBorder(
-                          ),
+                          border: OutlineInputBorder(),
                         ),
                       ),
-                      SizedBox(height: size.height*0.02,),
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
                       TextFormField(
                         keyboardType: TextInputType.phone,
                         controller: _phoneController,
@@ -111,23 +151,34 @@ class _FormViewState extends State<FormView> {
                         decoration: InputDecoration(
                           focusColor: Pallete.greenColor,
                           fillColor: Pallete.greenColor,
-
                           labelText: 'Phone Number',
                           prefixIcon: Icon(Icons.phone),
-                          border: OutlineInputBorder(
-                          ),
+                          border: OutlineInputBorder(),
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: size.height*0.02,),
-
-
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
                 Align(
-                  alignment: Alignment.center,
+                    alignment: Alignment.center,
                     child: InkWell(
-                      onTap: (){},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PolygonScreen(
+                                        id: auth.user.uid,
+                                        fullname: _usernameController.text,
+                                        phone: _phoneController.text,
+                                        roleid: widget.roleid,
+                                        role: widget.roleid,
+                                        email: auth.user.email,
+                                        image: auth.user.photoURL,
+                                      )));
+                        },
                         child: Button(size, "Next"))),
               ],
             ),
@@ -137,26 +188,29 @@ class _FormViewState extends State<FormView> {
     );
   }
 
-  showLoaderDialog(BuildContext context){
-    AlertDialog alert=AlertDialog(
+  showLoaderDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
       content: new Row(
         children: [
           CircularProgressIndicator(),
-          Container(margin: EdgeInsets.only(left: 7),child:Text("Uploading..." )),
-        ],),
+          Container(
+              margin: EdgeInsets.only(left: 7), child: Text("Uploading...")),
+        ],
+      ),
     );
-    showDialog(barrierDismissible: false,
-      context:context,
-      builder:(BuildContext context){
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
         return alert;
       },
     );
   }
 
   Future<bool> chooseImage() async {
-
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile == null) {
       showDialog(
@@ -192,6 +246,7 @@ class _FormViewState extends State<FormView> {
       return true;
     }
   }
+
   @override
   void dispose() {
     _usernameController.dispose();
@@ -214,5 +269,3 @@ class PhoneNumberValidator {
     return null; // Validation passed
   }
 }
-
-

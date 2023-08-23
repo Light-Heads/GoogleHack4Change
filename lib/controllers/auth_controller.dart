@@ -25,7 +25,7 @@ class AuthController extends GetxController {
         );
         UserCredential userCredential =
             await auth.signInWithCredential(credential);
-
+        print('New User: ${userCredential.additionalUserInfo!.isNewUser}');
         userCredential.additionalUserInfo!.isNewUser
             ? Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return RoleSelectionScreen();

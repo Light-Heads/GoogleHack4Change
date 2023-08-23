@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/auth/form.dart';
 
 import '../core/buttons.dart';
 import '../pallete.dart';
@@ -26,18 +27,18 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                  padding: const EdgeInsets.only(left: 28.0, top: 20),
-                  child: IconButton(
-                    onPressed: (){
-                      // Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.arrow_back, size: 30,color: Colors.black,),
-                  )
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: Padding(
+            //       padding: const EdgeInsets.only(left: 28.0, top: 20),
+            //       child: IconButton(
+            //         onPressed: (){
+            //           // Navigator.pop(context);
+            //         },
+            //         icon: Icon(Icons.arrow_back, size: 30,color: Colors.black,),
+            //       )
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(28.0),
               child: Column(
@@ -79,7 +80,9 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
             ),
             SizedBox(height: size.height*0.05,),
             InkWell(
-              //implement next route here.
+              onTap:(){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => FormView(roleid: selectedRole,)));
+              },
                 child: Center(child: Button(size, "Next"))),
 
           ],
