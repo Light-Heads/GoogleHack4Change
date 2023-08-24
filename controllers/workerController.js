@@ -78,13 +78,19 @@ class workerController {
         }
     }
     static async getWorkById(req, res, next) {
-        try{
+        try {
             const { id } = req.params.userId;
             const work = await Work.findById(id);
+    
+            if (!work) {
+                res.status(404).send('Work not found');
+                return;
+            }
+    
             res.status(200).send({ work: work });
-        }
-        catch(error){
-            
+        } catch (error) {
+            console.error('Error while getting work:', error);
+            res.status(500).send('Error getting work');
         }
     }
 
