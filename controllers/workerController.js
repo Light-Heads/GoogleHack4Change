@@ -83,7 +83,7 @@ class workerController {
             const work = await Work.findById(id);
     
             if (!work) {
-                res.status(404).send('Work not found');
+                res.status(405).send('Work not found');
                 return;
             }
     
