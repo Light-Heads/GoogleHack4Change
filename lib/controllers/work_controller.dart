@@ -6,18 +6,22 @@ import 'package:get/get.dart';
 class WorkController extends GetxController {
   var dio = d.Dio();
   var workList = [].obs;
+  var isLoading = false.obs;
   getWork(context, latitude, longitude) async {
     try {
-      d.Response res = await dio.get('${flaskAPIURL}/work', data: {
+      isLoading(true);
+      d.Response res = await dio.get('${monngoAPIURL}/work', data: {
         'location': [latitude, longitude]
       });
       var workListtemp = [];
-      for (var f in res.data) {
+      for (var f in res.data['workers']) {
         workListtemp.add(WorkModel.fromJson(f));
       }
       workList.assignAll(workListtemp);
     } catch (e) {
       print(e);
+    }finally{
+      isLoading(false);
     }
   }
 
@@ -32,7 +36,7 @@ class WorkController extends GetxController {
       required price,
       required date}) async {
     try {
-      d.Response res = await dio.post('${flaskAPIURL}/work', data: {
+      d.Response res = await dio.post('${monngoAPIURL}/work', data: {
         'title': title,
         'phone': phone,
         'location': {
@@ -53,20 +57,23 @@ class WorkController extends GetxController {
 
   getWorkByUserId(context, userId) async {
     try {
-      d.Response res = await dio.get('${flaskAPIURL}/work/user/$userId');
+      isLoading(true);
+      d.Response res = await dio.get('${monngoAPIURL}/getWorkById/$userId');
       var workListtemp = [];
-      for (var f in res.data) {
+      for (var f in res.data['work']) {
         workListtemp.add(WorkModel.fromJson(f));
       }
       workList.assignAll(workListtemp);
     } catch (e) {
       print(e);
+    }finally{
+      isLoading(false);
     }
   }
 
   delWork(context, id) async {
     try {
-      d.Response res = await dio.delete('${flaskAPIURL}/work', data: {
+      d.Response res = await dio.delete('${monngoAPIURL}/work', data: {
         '_id': id,
       });
       print(res.data);

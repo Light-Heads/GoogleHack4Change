@@ -1,0 +1,5 @@
+{
+    "language" : "Hindi",
+    "hello": "नमस्ते {username}",
+    "logout": "लॉग आउट"
+}

@@ -1,11 +1,15 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/auth/roles.dart';
 import 'package:frontend/controllers/location_controller.dart';
 import 'package:frontend/controllers/user_controller.dart';
+import 'package:frontend/l10n/l10n.dart';
 import 'package:frontend/theme.dart';
 import 'package:frontend/views/auth/login.dart';
+import 'package:frontend/views/workers/work_screen.dart';
 import 'package:get/get.dart';
 
 import 'navigation.dart';
@@ -25,6 +29,7 @@ class MyApp extends StatelessWidget {
     Get.put(LocationController());
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      supportedLocales: L10n.all,
       title: 'Flutter Demo',
       theme: AppTheme.theme,
       home: StreamBuilder(
@@ -45,7 +50,11 @@ class MyApp extends StatelessWidget {
 
                   // User data has been successfully fetched.
                   if (user.user.value.role != null) {
-                    return Navigation();
+                    if(user.user.value.role == 'worker'){
+                      return WorkerScreen();
+                    }else{
+                      return Navigation();
+                    }
                   } else {
                     return RoleSelectionScreen();
                   }

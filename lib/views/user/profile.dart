@@ -32,7 +32,11 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:frontend/common/jobs_card.dart';
 import 'package:frontend/controllers/auth_controller.dart';
+import 'package:frontend/controllers/user_controller.dart';
+import 'package:frontend/controllers/work_controller.dart';
+import 'package:frontend/views/workers/work_screen.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
@@ -49,15 +53,23 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
+  void initState() {
+    var user = Get.put(UserController());
+    var work = Get.put(WorkController());
+    work.getWorkByUserId(context, user.user.value.userId);
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     var auth = Get.put(AuthController());
+    var user = Get.put(UserController());
+    var work = Get.put(WorkController());
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Padding(
               padding: const EdgeInsets.all(28.0),
               child: Column(
@@ -72,36 +84,66 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 28.0),
-                        child: IconButton(onPressed: (){
-                            auth.signOut();
-                          },
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => Settings()),
-                          // );
-                            icon:Icon(Icons.logout, size: 30,)),
+                        child: IconButton(
+                            onPressed: () {
+                              auth.signOut();
+                            },
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(builder: (context) => Settings()),
+                            // );
+                            icon: Icon(
+                              Icons.logout,
+                              size: 30,
+                            )),
                       )
-
                     ],
                   ),
                 ],
               ),
             ),
-              // CircleAvatar(radius: 50,),
-              SizedBox(height: size.height*0.02,),
-              Padding(
-                padding: const EdgeInsets.only(left: 28.0),
-                child: Text("Your Name", style: sub1.copyWith(fontSize: 22, fontWeight: FontWeight.w600),),
+            // CircleAvatar(radius: 50,),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 28.0),
+              child: Text(
+                user.user.value.name??"Farmweller",
+                style: sub1.copyWith(fontSize: 22, fontWeight: FontWeight.w600),
               ),
-              SizedBox(height: size.height*0.02,),
-              Padding(
-                padding: const EdgeInsets.only(left: 28.0),
-                child: Text("Farmer", style: sub1.copyWith(fontSize: 18, fontWeight: FontWeight.w600, color: Pallete.greenColor),),
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 28.0),
+              child: Text(
+                "Farmer",
+                style: sub1.copyWith(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Pallete.greenColor),
               ),
-          ]
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            Container(
+              height: size.height * 0.6,
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: work.workList.length,
+                itemBuilder: (context, index) {
+                return JobsComponent(
+                    size: size,
+                    workModel: work.workList[index]);
+              }),
+            ),
+          ]),
+        ),
       ),
-    ),
-    ), );
+    );
   }
 }
 

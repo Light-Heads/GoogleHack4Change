@@ -7,6 +7,7 @@ import 'package:frontend/config.dart';
 import 'package:frontend/core/utils.dart';
 import 'package:frontend/models/user.dart';
 import 'package:frontend/navigation.dart';
+import 'package:frontend/views/workers/work_screen.dart';
 import 'package:get/get.dart';
 
 var dio = d.Dio();
@@ -58,6 +59,12 @@ class UserController extends GetxController {
       });
       print(response);
       user.value = UserModel.fromJson(response.data['user']);
+      if(roleName == "worker"){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => WorkerScreen()),
+        );
+      }
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => Navigation()),

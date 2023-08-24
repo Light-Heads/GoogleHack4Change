@@ -1,0 +1,19 @@
+{
+    "language" : "English",
+    "@language" : {
+        "description" : "The current Language"
+    },
+    "hello": "Hello {username}",
+    "@hello":{
+        "description": "A welcome message",
+        "placeholders": {
+            "username": {
+                "type": "String"
+            }
+        }
+    },
+    "logout": "Logout",
+    "@logout":{
+        "description": "aaljdf"
+    }
+}

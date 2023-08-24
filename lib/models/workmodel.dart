@@ -19,7 +19,10 @@ class WorkModel {
   WorkModel.fromJson(Map<String, dynamic> json) {
     location = json['location'] != null
         ? new Location.fromJson(json['location'])
-        : null;
+        : Location(
+            type: 'Point',
+            coordinates: [0.0, 0.0],
+        );
     sId = json['_id'];
     title = json['title'];
     phone = json['phone'];
