@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/controllers/commodity_controller.dart';
 import 'package:frontend/controllers/location_controller.dart';
 import 'package:frontend/controllers/polygon_controller.dart';
+import 'package:frontend/controllers/user_controller.dart';
 import 'package:frontend/controllers/weather_controller.dart';
 import 'package:frontend/core/buttons.dart';
 import 'package:frontend/core/utils.dart';
@@ -13,7 +14,6 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../polygon/suggestions.dart';
 
-
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -22,13 +22,19 @@ class Homepage extends StatefulWidget {
 }
 
 final polygon = Get.put(PolygonController());
+final user = Get.put(UserController());
 
 class _HomepageState extends State<Homepage> {
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero).then((value) async {
+      await polygon.getSatelliteImagery(user.user.value.polygonId ?? "");
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    String nitrogen = calculateNitrogen(polygon.ndvi.value.mean!.toDouble());
-    String health = calculateHealth(polygon.ndvi.value.mean!.toDouble());
-    String waterStress = calculateWaterStress(polygon.ndvi.value.mean!.toDouble(), polygon.dswi.value.mean!.toDouble());
     var size = MediaQuery.of(context).size;
     final controller = Get.put(CommodityController());
     final location = Get.put(LocationController());
@@ -36,7 +42,15 @@ class _HomepageState extends State<Homepage> {
 
     return SafeArea(
       child: Scaffold(body: Obx(() {
-        return (controller.isDataLoading.value || location.isDataLoading.value || weather.isDataLoading.value)
+        String nitrogen =
+            calculateNitrogen(polygon.ndvi.value.mean??0.toDouble());
+        String health = calculateHealth(polygon.ndvi.value.mean??0.toDouble());
+        String waterStress = calculateWaterStress(
+            polygon.ndvi.value.mean??0.toDouble(),
+            polygon.dswi.value.mean??0.toDouble());
+        return (controller.isDataLoading.value ||
+                location.isDataLoading.value ||
+                weather.isDataLoading.value)
             ? const Center(child: CircularProgressIndicator())
             : Scaffold(
                 body: SafeArea(
@@ -66,7 +80,8 @@ class _HomepageState extends State<Homepage> {
                                     ),
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Padding(
                                         padding: EdgeInsets.only(left: 18.0),
@@ -78,7 +93,8 @@ class _HomepageState extends State<Homepage> {
                                               width: 5,
                                             ),
                                             Text(
-                                              location.currentAddress.toString(),
+                                              location.currentAddress
+                                                  .toString(),
                                               style: sub1,
                                             )
                                           ],
@@ -92,8 +108,8 @@ class _HomepageState extends State<Homepage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 18.0),
+                                            padding: const EdgeInsets.only(
+                                                left: 18.0),
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -114,19 +130,22 @@ class _HomepageState extends State<Homepage> {
                                                     Padding(
                                                       padding: EdgeInsets.only(
                                                           top: 8.0),
-                                                      child: Text('Fahrenheit',
+                                                      child: Text('Kelvin',
                                                           style: sub1.copyWith(
                                                               fontWeight:
-                                                                  FontWeight.w500,
+                                                                  FontWeight
+                                                                      .w500,
                                                               fontSize: 18)),
                                                     )
                                                   ],
                                                 ),
                                                 Container(
-                                                  decoration: const BoxDecoration(
+                                                  decoration:
+                                                      const BoxDecoration(
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color(0x3FACACAC),
+                                                        color:
+                                                            Color(0x3FACACAC),
                                                         blurRadius: 19,
                                                         offset: Offset(0, 9),
                                                         spreadRadius: 0,
@@ -149,18 +168,23 @@ class _HomepageState extends State<Homepage> {
                                         ],
                                       ),
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
                                         children: [
                                           Padding(
-                                            padding: EdgeInsets.only(right: 18.0),
+                                            padding:
+                                                EdgeInsets.only(right: 18.0),
                                             child: InkWell(
                                                 onTap: () {
                                                   Navigator.push(
                                                     context,
-                                                    MaterialPageRoute(builder: (context) => WeatherDetail()),
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            WeatherDetail()),
                                                   );
                                                 },
-                                                child: Button(size, "View More")),
+                                                child:
+                                                    Button(size, "View More")),
                                           ),
                                         ],
                                       )
@@ -171,8 +195,8 @@ class _HomepageState extends State<Homepage> {
                             ),
                           ),
                           Container(
-                            width: size.width*0.9,
-                            height: size.height*0.4,
+                            width: size.width * 0.9,
+                            height: size.height * 0.4,
                             decoration: ShapeDecoration(
                               color: Colors.white,
                               shape: RoundedRectangleBorder(
@@ -192,50 +216,91 @@ class _HomepageState extends State<Homepage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Current Conditions", style: h1,),
-                                  SizedBox(height: size.height*0.01,),
-                                  Text("This data directly comes from satellite", style: sub1,),
-                                  SizedBox(height: size.height*0.03,),
+                                  Text(
+                                    "Current Conditions",
+                                    style: h1,
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.01,
+                                  ),
+                                  Text(
+                                    "This data directly comes from satellite",
+                                    style: sub1,
+                                  ),
+                                  SizedBox(
+                                    height: size.height * 0.03,
+                                  ),
                                   Padding(
                                     padding: const EdgeInsets.all(18.0),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Column(
                                           children: [
-                                            Image.asset("assets/images/heart.gif"),
-                                            SizedBox(height: size.height*0.02,),
-                                            Text("Crop Health", style: h1.copyWith(fontWeight: FontWeight.w700, fontSize: 14),),
-                                            SizedBox(height: size.height*0.01,),
+                                            Image.asset(
+                                                "assets/images/heart.gif"),
+                                            SizedBox(
+                                              height: size.height * 0.02,
+                                            ),
+                                            Text(
+                                              "Crop Health",
+                                              style: h1.copyWith(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 14),
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.01,
+                                            ),
                                             Text(health),
                                           ],
                                         ),
                                         Column(
                                           children: [
-                                            Image.asset("assets/images/water.gif"),
-                                            SizedBox(height: size.height*0.02,),
-                                            Text("Water Stress", style: h1.copyWith(fontWeight: FontWeight.w700, fontSize: 14),),
-                                            SizedBox(height: size.height*0.01,),
+                                            Image.asset(
+                                                "assets/images/water.gif"),
+                                            SizedBox(
+                                              height: size.height * 0.02,
+                                            ),
+                                            Text(
+                                              "Water Stress",
+                                              style: h1.copyWith(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 14),
+                                            ),
+                                            SizedBox(
+                                              height: size.height * 0.01,
+                                            ),
                                             Text(waterStress),
                                           ],
                                         ),
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: size.height*0.01,),
-                                  Center(child: Text("Nitrogen leves are Good")),
-
+                                  SizedBox(
+                                    height: size.height * 0.01,
+                                  ),
+                                  Center(
+                                      child: Text("Nitrogen leves are Good")),
                                 ],
                               ),
                             ),
                           ),
-                          SizedBox(height: size.height*0.03,),
+                          SizedBox(
+                            height: size.height * 0.03,
+                          ),
                           InkWell(
-                            onTap: (){
+                            onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => SugesstionScreen(nitrogen: nitrogen,waterStress: waterStress,health: health,)),
+                                MaterialPageRoute(
+                                    builder: (context) => SugesstionScreen(
+                                          nitrogen: nitrogen,
+                                          waterStress: waterStress,
+                                          health: health,
+                                        )),
                               );
                             },
                             child: Container(
@@ -251,19 +316,21 @@ class _HomepageState extends State<Homepage> {
                                   ),
                                 ),
                               ),
-                              width: size.width*0.9,
-                              height: size.height*0.07,
+                              width: size.width * 0.9,
+                              height: size.height * 0.07,
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(0.5),
                                     spreadRadius: 5,
                                     blurRadius: 27,
-                                    offset: Offset(0, 3), // changes position of shadow
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
                                   ),
                                 ],
                                 color: Pallete.greenColor,
-                                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
                                 // image: DecorationImage(
                                 //   image: AssetImage("assets/images/satelite.gif"),
                                 //   fit: BoxFit.cover,
@@ -271,18 +338,13 @@ class _HomepageState extends State<Homepage> {
                               ),
                             ),
                           ),
-
-
                         ],
                       ),
                     ),
-
                   ),
                 ),
               );
       })),
     );
   }
-
-
 }

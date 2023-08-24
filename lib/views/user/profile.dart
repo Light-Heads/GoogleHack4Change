@@ -36,6 +36,9 @@ import 'package:frontend/common/jobs_card.dart';
 import 'package:frontend/controllers/auth_controller.dart';
 import 'package:frontend/controllers/user_controller.dart';
 import 'package:frontend/controllers/work_controller.dart';
+import 'package:frontend/core/buttons.dart';
+import 'package:frontend/views/auth/login.dart';
+import 'package:frontend/views/user/workfrom.dart';
 import 'package:frontend/views/workers/work_screen.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -59,6 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     work.getWorkByUserId(context, user.user.value.userId);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var auth = Get.put(AuthController());
@@ -69,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: SafeArea(
         child: Center(
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             Padding(
               padding: const EdgeInsets.all(28.0),
               child: Column(
@@ -85,8 +89,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Padding(
                         padding: const EdgeInsets.only(right: 28.0),
                         child: IconButton(
-                            onPressed: () {
-                              auth.signOut();
+                            onPressed: () async {
+                              await auth.signOut();
+                              await user.signOut();
+                              Navigator.popUntil(context, (route) => false);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginScreen()));
                             },
                             // Navigator.push(
                             //   context,
@@ -102,43 +112,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
             ),
-            // CircleAvatar(radius: 50,),
-            SizedBox(
-              height: size.height * 0.02,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 28.0),
-              child: Text(
-                user.user.value.name??"Farmweller",
-                style: sub1.copyWith(fontSize: 22, fontWeight: FontWeight.w600),
-              ),
+            CircleAvatar(
+              radius: 50,
+              backgroundImage: NetworkImage(user.user.value.image ??
+                  "https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"),
             ),
             SizedBox(
               height: size.height * 0.02,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 28.0),
-              child: Text(
-                "Farmer",
-                style: sub1.copyWith(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: Pallete.greenColor),
-              ),
+            Text(
+              user.user.value.name ?? "Farmweller",
+              style: sub1.copyWith(fontSize: 22, fontWeight: FontWeight.w600),
+            ),
+            Text(
+              "Farmer",
+              style: sub1.copyWith(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Pallete.greenColor),
             ),
             SizedBox(
               height: size.height * 0.02,
             ),
+            InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProjectForm()),
+                  );
+                },
+                child: Button(size, "Add Work")),
             Container(
-              height: size.height * 0.6,
+              height: size.height * 0.44,
               child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: work.workList.length,
-                itemBuilder: (context, index) {
-                return JobsComponent(
-                    size: size,
-                    workModel: work.workList[index]);
-              }),
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: work.workList.length,
+                  itemBuilder: (context, index) {
+                    return JobsComponent(
+                        size: size, workModel: work.workList[index]);
+                  }),
             ),
           ]),
         ),

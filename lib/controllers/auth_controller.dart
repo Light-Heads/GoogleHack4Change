@@ -4,6 +4,7 @@ import 'package:frontend/auth/form.dart';
 import 'package:frontend/auth/roles.dart';
 import 'package:frontend/core/utils.dart';
 import 'package:frontend/navigation.dart';
+import 'package:frontend/roleloader.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -31,7 +32,7 @@ class AuthController extends GetxController {
                 return RoleSelectionScreen();
               }))
             : Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Navigation();
+                return RoleLoader();
               }));
       }
     } catch (e) {

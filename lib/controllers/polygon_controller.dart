@@ -13,6 +13,7 @@ var dio = Dio();
 class PolygonController extends GetxController {
   var polygondata = PolygonModel().obs;
   var soilMoisture = SoilMoistureModel().obs;
+  var isLoading = false.obs;
   var uvIndex = 0.0.obs;
   var ndvi = PolyStatsModel().obs;
   var evi = PolyStatsModel().obs;
@@ -61,6 +62,7 @@ class PolygonController extends GetxController {
   }
 
   getSatelliteImagery(String polygonId) async {
+    
     final DateTime now = DateTime.now();
     final DateTime end = now;
     final DateTime start = now.subtract(Duration(days: 16));
@@ -72,6 +74,7 @@ class PolygonController extends GetxController {
         'http://api.agromonitoring.com/agro/1.0/image/search?start=$startTimestamp&end=$endTimestamp&polyid=$polygonId&appid=$agroMonitoringAPIKey';
 
     try {
+      isLoading.value = true;
       var res = await dio.get(apiUrl);
       getNdviUrl(res.data[0]['stats']['ndvi']);
       getEviUrl(res.data[0]['stats']['evi']);
@@ -80,6 +83,9 @@ class PolygonController extends GetxController {
       getDswiUrl(res.data[0]['stats']['dswi']);
       getNdwiUrl(res.data[0]['stats']['ndwi']);
     } catch (error) {
+      print(error);
+    } finally {
+      isLoading.value = false;
     }
   }
 

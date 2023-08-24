@@ -86,6 +86,12 @@ class LocationController extends GetxController {
       Placemark place = placemarks[0];
       currentAddress.value =
       '${place.street},${place.subLocality}';
+      city.value = place.locality??'';
+      state.value = place.administrativeArea??'';
+      country.value = place.country??'';
+      district.value = place.subAdministrativeArea??'';
+      locality.value = place.subLocality??'';
+      postalCode.value = place.postalCode??'';
       // currentAddress.value =
       //     '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
     }).catchError((e) {

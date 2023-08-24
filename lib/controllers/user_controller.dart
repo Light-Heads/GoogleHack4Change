@@ -59,7 +59,7 @@ class UserController extends GetxController {
       });
       print(response);
       user.value = UserModel.fromJson(response.data['user']);
-      if(roleName == "worker"){
+      if (roleName == "worker") {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => WorkerScreen()),
@@ -75,7 +75,7 @@ class UserController extends GetxController {
     }
   }
 
-  getUser(String userId) async{
+  getUser(String userId) async {
     try {
       String apiUrl = '$monngoAPIURL/getUser/$userId';
       var res = await dio.get(apiUrl);
@@ -84,5 +84,9 @@ class UserController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  signOut() async {
+    user.value = UserModel();
   }
 }

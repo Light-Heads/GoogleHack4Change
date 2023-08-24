@@ -69,12 +69,12 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                     onTap: () => _selectRole(2), roleImageAsset: 'assets/images/worker.png',
                   ),
                   SizedBox(height: 20),
-                  RoleContainer(
-                    role: 3,
-                    roleName: 'Business',
-                    isSelected: selectedRole == 3,
-                    onTap: () => _selectRole(3), roleImageAsset: 'assets/images/business.png',
-                  ),
+                  // RoleContainer(
+                  //   role: 3,
+                  //   roleName: 'Business',
+                  //   isSelected: selectedRole == 3,
+                  //   onTap: () => _selectRole(3), roleImageAsset: 'assets/images/business.png',
+                  // ),
                 ],
               ),
             ),

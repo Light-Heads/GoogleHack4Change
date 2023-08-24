@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/common/jobs_card.dart';
+import 'package:frontend/controllers/auth_controller.dart';
 import 'package:frontend/controllers/location_controller.dart';
+import 'package:frontend/controllers/user_controller.dart';
 import 'package:frontend/controllers/work_controller.dart';
 import 'package:frontend/models/workmodel.dart';
 import 'package:frontend/pallete.dart';
 import 'package:frontend/theme.dart';
+import 'package:frontend/views/auth/login.dart';
 import 'package:get/get.dart';
 
 class WorkerScreen extends StatefulWidget {
@@ -20,15 +23,20 @@ class _WorkerScreenState extends State<WorkerScreen> {
   @override
   void initState() {
     super.initState();
-    workController.getWork(
+    Future.delayed(Duration.zero, () async {
+      await location.getCurrentPosition();
+      workController.getWork(
         context, location.position.latitude, location.position.longitude);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Obx(
-      () => Scaffold(
+    final auth = Get.put(AuthController());
+    final user = Get.put(UserController());
+    return Obx(() {
+      return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -39,6 +47,21 @@ class _WorkerScreenState extends State<WorkerScreen> {
           ),
           centerTitle: true,
           elevation: 0,
+          actions: [
+            IconButton(
+              onPressed: () async {
+                await auth.signOut();
+                await user.signOut();
+                Navigator.popUntil(context, (route) => false);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
+              },
+              icon: const Icon(
+                Icons.add,
+                color: Colors.black,
+              ),
+            ),
+          ],
         ),
         body: (workController.isLoading.value)
             ? const Center(child: CircularProgressIndicator())
@@ -75,7 +98,7 @@ class _WorkerScreenState extends State<WorkerScreen> {
                   ),
                 ],
               ),
-      ),
-    );
+      );
+    });
   }
 }

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:frontend/controllers/auth_controller.dart';
+import 'package:frontend/controllers/location_controller.dart';
+import 'package:frontend/controllers/user_controller.dart';
 import 'package:frontend/pallete.dart';
 import 'package:frontend/views/polygon/polygon.dart';
 import 'package:get/get.dart';
@@ -11,8 +13,8 @@ import '../core/buttons.dart';
 import '../theme.dart';
 import 'package:image_picker/image_picker.dart';
 
-
 XFile? image;
+
 class FormView extends StatefulWidget {
   final int roleid;
   const FormView({
@@ -30,6 +32,8 @@ class _FormViewState extends State<FormView> {
   TextEditingController _phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var user = Get.put(UserController());
+    var location = Get.put(LocationController());
     var size = MediaQuery.of(context).size;
     var auth = Get.put(AuthController());
     return Scaffold(
@@ -185,18 +189,37 @@ class _FormViewState extends State<FormView> {
                     alignment: Alignment.center,
                     child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PolygonScreen(
-                                        id: auth.user.uid,
-                                        fullname: _usernameController.text,
-                                        phone: _phoneController.text,
-                                        roleid: widget.roleid,
-                                        role: widget.roleid,
-                                        email: auth.user.email,
-                                        image: auth.user.photoURL,
-                                      )));
+                          print(widget.roleid);
+                          if (widget.roleid == 1) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PolygonScreen(
+                                          id: auth.user.uid,
+                                          fullname: _usernameController.text,
+                                          phone: _phoneController.text,
+                                          roleid: widget.roleid,
+                                          role: widget.roleid,
+                                          email: auth.user.email,
+                                          image: auth.user.photoURL,
+                                        )));
+                          } else {
+                            print('user');
+                            user.addUser(context,
+                                userId: auth.user.uid,
+                                name: _usernameController.text,
+                                phone: _phoneController.text,
+                                email: auth.user.email ?? "",
+                                role: widget.roleid,
+                                image: auth.user.photoURL ?? "",
+                                lat: location.position.latitude,
+                                long: location.position.longitude,
+                                polygonId: "",
+                                district: location.district.value,
+                                city: location.city.value,
+                                state: location.state.value,
+                                locality: location.locality.value);
+                          }
                         },
                         child: Button(size, "Next"))),
               ],
