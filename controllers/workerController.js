@@ -12,11 +12,11 @@ class workerController {
             city,
             state,
             locality,
-            work,
             price,
         } = req.body;
         try {
-            const user = new Work({
+            console.log("Test");
+            const work = new Work({
                 title: title,
                 name: name,
                 phone: phone,
@@ -29,7 +29,7 @@ class workerController {
                 work: work,
                 price: price,
             });
-            await user.save();
+            await work.save();
             res.status(200).send({ message: 'Work added successfully' });
         }
         catch (error) {
@@ -79,7 +79,7 @@ class workerController {
     }
     static async getWorkById(req, res, next) {
         try{
-            const { id } = req.params.workid;
+            const { id } = req.params.userId;
             const work = await Work.findById(id);
             res.status(200).send({ work: work });
         }
