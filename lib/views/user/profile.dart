@@ -40,6 +40,7 @@ import 'package:frontend/core/buttons.dart';
 import 'package:frontend/views/auth/login.dart';
 import 'package:frontend/views/user/workfrom.dart';
 import 'package:frontend/views/workers/work_screen.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
@@ -124,13 +125,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               user.user.value.name ?? "Farmweller",
               style: sub1.copyWith(fontSize: 22, fontWeight: FontWeight.w600),
             ),
-            Text(
-              "Farmer",
-              style: sub1.copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Pallete.greenColor),
-            ),
+            // Text(
+            //   // AppLocalizations.of(context)!.farmer,
+            //   style: sub1.copyWith(
+            //       fontSize: 18,
+            //       fontWeight: FontWeight.w600,
+            //       color: Pallete.greenColor),
+            // ),
             SizedBox(
               height: size.height * 0.02,
             ),

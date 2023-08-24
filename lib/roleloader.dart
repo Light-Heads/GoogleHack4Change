@@ -17,11 +17,6 @@ class RoleLoader extends StatefulWidget {
 class RoleLoaderState extends State<RoleLoader> {
   final auth = Get.put(AuthController());
   final user = Get.put(UserController());
-  @override
-  void initState() {
-    super.initState();
-    user.getUser(auth.user.uid);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +34,7 @@ class RoleLoaderState extends State<RoleLoader> {
         // User data has been successfully fetched.
         if (user.user.value.role != null) {
           if (user.user.value.role == 'worker') {
+            print(user.user.value.role);
             return WorkerScreen();
           } else {
             return Navigation();

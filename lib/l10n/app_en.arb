@@ -1,10 +1,10 @@
 {
-    "language" : "English",
-    "@language" : {
-        "description" : "The current Language"
+    "language": "English",
+    "@language": {
+        "description": "The current Language"
     },
     "hello": "Hello {username}",
-    "@hello":{
+    "@hello": {
         "description": "A welcome message",
         "placeholders": {
             "username": {
@@ -13,7 +13,19 @@
         }
     },
     "logout": "Logout",
-    "@logout":{
-        "description": "aaljdf"
+    "@logout": {
+        "description": "Log out action"
+    },
+    "profile": "Profile",
+    "@profile": {
+        "description": "User profile"
+    },
+    "addWork": "Add Work",
+    "@addWork": {
+        "description": "Add a new work item"
+    },
+    "farmer": "Farmer",
+    "@farmer": {
+        "description": "Description about a farmer"
     }
 }

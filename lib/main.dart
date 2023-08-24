@@ -10,9 +10,11 @@ import 'package:frontend/l10n/l10n.dart';
 import 'package:frontend/theme.dart';
 import 'package:frontend/views/auth/login.dart';
 import 'package:frontend/views/workers/work_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-
 import 'navigation.dart';
+// import 'package:flutter_gen/';
+
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +32,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       supportedLocales: L10n.all,
+      localizationsDelegates: [
+        // AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      locale: const Locale('en'),
       title: 'Flutter Demo',
       theme: AppTheme.theme,
       home: StreamBuilder(

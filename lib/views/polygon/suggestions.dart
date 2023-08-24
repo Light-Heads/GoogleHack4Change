@@ -105,9 +105,9 @@ class FarmDataTile extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         children: [
-          ListTile(
-            title: Text('Polygon Data: ${poly.polygondata.value.createdAt}'),
-          ),
+          // ListTile(
+          //   title: Text('Polygon Data: ${poly.polygondata.value.createdAt}'),
+          // ),
           ListTile(
             title: Text('Soil Moisture: ${poly.soilMoisture.value.moisture}'),
           ),
@@ -194,6 +194,14 @@ class Insights extends StatelessWidget {
     }
   }
 
+  String interpretCropMaturity(String cropMaturity) {
+    if (cropMaturity == "High") {
+      return "Nitrogen levels are adequate for current crop conditions.";
+    } else {
+      return "Nitrogen levels are low. Consider applying nitrogen-rich fertilizers.";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -236,6 +244,19 @@ class Insights extends StatelessWidget {
           SizedBox(height: 15,),
           ListTile(
             title: Text('Nitrogen Level: ${nitrogen}'),
+            subtitle: Text(interpretNitrogenLevel(nitrogen)),
+            trailing: Container(
+              width: 12,
+              height: 12,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: getColor(nitrogen),
+              ),
+            ),
+          ),
+          SizedBox(height: 15,),
+          ListTile(
+            title: Text('Crop Maturity: ${nitrogen}'),
             subtitle: Text(interpretNitrogenLevel(nitrogen)),
             trailing: Container(
               width: 12,

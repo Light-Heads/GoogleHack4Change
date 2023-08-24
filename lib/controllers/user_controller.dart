@@ -64,11 +64,12 @@ class UserController extends GetxController {
           context,
           MaterialPageRoute(builder: (context) => WorkerScreen()),
         );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Navigation()),
+        );
       }
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Navigation()),
-      );
     } catch (e) {
       print(e);
       showSnackBar(context, e.toString());

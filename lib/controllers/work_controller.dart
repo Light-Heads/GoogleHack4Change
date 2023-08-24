@@ -57,7 +57,7 @@ class WorkController extends GetxController {
 
   getWorkByUserId(context, userId) async {
     try {
-      isLoading(true);
+      // isLoading(true);
       d.Response res = await dio.get('${monngoAPIURL}/getWorkById/$userId');
       var workListtemp = [];
       for (var f in res.data['work']) {
@@ -67,7 +67,7 @@ class WorkController extends GetxController {
     } catch (e) {
       print(e);
     }finally{
-      isLoading(false);
+      // isLoading(false);
     }
   }
 

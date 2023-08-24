@@ -1,5 +1,8 @@
 {
-    "language" : "Hindi",
+    "language": "Hindi",
     "hello": "नमस्ते {username}",
-    "logout": "लॉग आउट"
+    "logout": "लॉगआउट",
+    "profile": "प्रोफ़ाइल",
+    "addWork": "काम जोड़ें",
+    "farmer": "किसान"
 }
