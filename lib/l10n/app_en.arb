@@ -1,0 +1,31 @@
+{
+    "language": "English",
+    "@language": {
+        "description": "The current Language"
+    },
+    "hello": "Hello {username}",
+    "@hello": {
+        "description": "A welcome message",
+        "placeholders": {
+            "username": {
+                "type": "String"
+            }
+        }
+    },
+    "logout": "Logout",
+    "@logout": {
+        "description": "Log out action"
+    },
+    "profile": "Profile",
+    "@profile": {
+        "description": "User profile"
+    },
+    "addWork": "Add Work",
+    "@addWork": {
+        "description": "Add a new work item"
+    },
+    "farmer": "Farmer",
+    "@farmer": {
+        "description": "Description about a farmer"
+    }
+}
