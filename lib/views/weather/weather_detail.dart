@@ -31,7 +31,7 @@ class _WeatherDetailState extends State<WeatherDetail> {
               Container(
                 width: 396,
                 height: 427,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment(0.00, -1.00),
                     end: Alignment(0, 1),
@@ -105,33 +105,17 @@ class _WeatherDetailState extends State<WeatherDetail> {
                           ),
                           SizedBox(height: size.height*0.01,),
                           Container(
-                            width: size.width*0.85,
-                            height: size.height*0.17,
-                            decoration: ShapeDecoration(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
-                              ),
-                              shadows: const [
-                                BoxShadow(
-                                  color: Color(0x3FACACAC),
-                                  blurRadius: 26,
-                                  offset: Offset(0, 19),
-                                  spreadRadius: 0,
-                                )
-                              ],
-                            ),
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 18.0, left: 25, right: 25, bottom: 18),
+                              padding: EdgeInsets.only(top: 18.0, left: 25, right: 25, bottom: 18),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Column(
                                    children: [
                                      SizedBox(
-                                         height: 50,
-                                       width: 50,
                                          child: Image.asset('assets/images/wind.gif'),
+                                       height: 50,
+                                       width: 50,
                                      ),
                                      SizedBox(height: size.height*0.007,),
                                      Text.rich(
@@ -139,7 +123,7 @@ class _WeatherDetailState extends State<WeatherDetail> {
                                          children: [
                                            TextSpan(
                                              text: weather.weather.value.wind!.speed.toString(),
-                                             style: const TextStyle(
+                                             style: TextStyle(
                                                color: Colors.black,
                                                fontSize: 18.73,
                                                fontFamily: 'Gilroy',
@@ -147,7 +131,7 @@ class _WeatherDetailState extends State<WeatherDetail> {
                                                letterSpacing: -0.66,
                                              ),
                                            ),
-                                           const TextSpan(
+                                           TextSpan(
                                              text: 'Km/hr',
                                              style: TextStyle(
                                                color: Colors.black,
@@ -163,16 +147,16 @@ class _WeatherDetailState extends State<WeatherDetail> {
                                      Text("Wind", style: sub1.copyWith(fontSize: 10, fontWeight: FontWeight.w200),),
                                    ],
                                   ),
-                                  const Padding(
+                                  Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: VerticalDivider(width: 10,thickness: 2,),
                                   ),
                                   Column(
                                     children: [
                                       SizedBox(
+                                        child: Image.asset('assets/images/hot.gif'),
                                         height: 50,
                                         width: 50,
-                                        child: Image.asset('assets/images/hot.gif'),
                                       ),
                                       SizedBox(height: size.height*0.007,),
                                       Text.rich(
@@ -180,7 +164,7 @@ class _WeatherDetailState extends State<WeatherDetail> {
                                           children: [
                                             TextSpan(
                                               text: weather.weather.value.main!.pressure.toString(),
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 18.73,
                                                 fontFamily: 'Gilroy',
@@ -188,7 +172,7 @@ class _WeatherDetailState extends State<WeatherDetail> {
                                                 letterSpacing: -0.66,
                                               ),
                                             ),
-                                            const TextSpan(
+                                            TextSpan(
                                               text: 'Ha',
                                               style: TextStyle(
                                                 color: Colors.black,
@@ -204,16 +188,16 @@ class _WeatherDetailState extends State<WeatherDetail> {
                                       Text("Pressure", style: sub1.copyWith(fontSize: 10, fontWeight: FontWeight.w200),),
                                     ],
                                   ),
-                                  const Padding(
+                                  Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: VerticalDivider(width: 10,thickness: 2,),
                                   ),
                                   Column(
                                     children: [
                                       SizedBox(
+                                        child: Image.asset('assets/images/humidity.gif'),
                                         height: 50,
                                         width: 50,
-                                        child: Image.asset('assets/images/humidity.gif'),
                                       ),
                                       SizedBox(height: size.height*0.007,),
                                       Text.rich(
@@ -221,7 +205,7 @@ class _WeatherDetailState extends State<WeatherDetail> {
                                           children: [
                                             TextSpan(
                                               text: weather.weather.value.main!.humidity.toString(),
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 18.73,
                                                 fontFamily: 'Gilroy',
@@ -229,7 +213,7 @@ class _WeatherDetailState extends State<WeatherDetail> {
                                                 letterSpacing: -0.66,
                                               ),
                                             ),
-                                            const TextSpan(
+                                            TextSpan(
                                               text: '%',
                                               style: TextStyle(
                                                 color: Colors.black,
@@ -247,6 +231,22 @@ class _WeatherDetailState extends State<WeatherDetail> {
                                   ),
                                 ],
                               ),
+                            ),
+                            width: size.width*0.85,
+                            height: size.height*0.17,
+                            decoration: ShapeDecoration(
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              shadows: [
+                                const BoxShadow(
+                                  color: Color(0x3FACACAC),
+                                  blurRadius: 26,
+                                  offset: Offset(0, 19),
+                                  spreadRadius: 0,
+                                )
+                              ],
                             ),
                           )
 
@@ -266,7 +266,7 @@ class _WeatherDetailState extends State<WeatherDetail> {
                       SizedBox(
                         height: size.height*0.37,
                           child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
+                            physics: BouncingScrollPhysics(),
                               itemCount: weather.forecastWeatherList.length,
                               itemBuilder: (context, i){
                             return WeatherCard(size, weather.forecastWeatherList.value[i]);

@@ -1,7 +1,9 @@
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:frontend/config.dart';
+
 import 'package:frontend/models/polygon.dart';
+import 'package:frontend/config.dart';
 import 'package:frontend/models/polystats.dart';
 import 'package:frontend/models/soilmoisture.dart';
 import 'package:get/get.dart';
@@ -22,19 +24,21 @@ class PolygonController extends GetxController {
   var ndwi = PolyStatsModel().obs;
 
   createPolygon(List<LatLng> coordinates) async {
-    var res = await dio.post('$APIURL/polygons?appid=$APIKey', data: {
-      "name": "Polygon 1",
-      "geo_json": {
-        "type": "Feature",
-        "properties": {},
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            coordinates.map((e) => [e.longitude, e.latitude]).toList()
-          ],
-        }
-      }
-    });
+    var res = await dio.post(
+        'http://api.agromonitoring.com/agro/1.0/polygons?appid=${agroMonitoringAPIKey}',
+        data: {
+          "name": "Polygon 1",
+          "geo_json": {
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                coordinates.map((e) => [e.longitude, e.latitude]).toList()
+              ],
+            }
+          }
+        });
     polygondata.value = PolygonModel.fromMap(res.data);
   }
 
@@ -46,7 +50,7 @@ class PolygonController extends GetxController {
 
   getSoilMoisture(String polygonId) async {
     var res = await dio.get(
-        'http://api.agromonitoring.com/agro/1.0/soil?polyid=$polygonId&appid=$APIKey');
+        'http://api.agromonitoring.com/agro/1.0/soil?polyid=${polygonId}&appid=${agroMonitoringAPIKey}');
     var soilMoistureData = SoilMoistureModel.fromJson(res.data);
     soilMoisture.value = soilMoistureData;
   }
@@ -54,20 +58,21 @@ class PolygonController extends GetxController {
   // get
   getUVIndex(String polygonId) async {
     var res = await dio.get(
-        'http://api.agromonitoring.com/agro/1.0/uvi?polyid=$polygonId&appid=$APIKey');
+        'http://api.agromonitoring.com/agro/1.0/uvi?polyid=${polygonId}&appid=${agroMonitoringAPIKey}');
     uvIndex.value = res.data['uvi'];
   }
 
   getSatelliteImagery(String polygonId) async {
+    
     final DateTime now = DateTime.now();
     final DateTime end = now;
-    final DateTime start = now.subtract(const Duration(days: 16));
+    final DateTime start = now.subtract(Duration(days: 16));
 
     final int startTimestamp = start.millisecondsSinceEpoch ~/ 1000;
     final int endTimestamp = end.millisecondsSinceEpoch ~/ 1000;
 
     final String apiUrl =
-        'http://api.agromonitoring.com/agro/1.0/image/search?start=$startTimestamp&end=$endTimestamp&polyid=$polygonId&appid=$APIKey';
+        'http://api.agromonitoring.com/agro/1.0/image/search?start=$startTimestamp&end=$endTimestamp&polyid=$polygonId&appid=$agroMonitoringAPIKey';
 
     try {
       isLoading.value = true;
@@ -78,6 +83,8 @@ class PolygonController extends GetxController {
       getNriUrl(res.data[0]['stats']['nri']);
       getDswiUrl(res.data[0]['stats']['dswi']);
       getNdwiUrl(res.data[0]['stats']['ndwi']);
+    } catch (error) {
+      print(error);
     } finally {
       isLoading.value = false;
     }

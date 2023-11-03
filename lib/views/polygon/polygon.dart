@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:frontend/controllers/location_controller.dart';
 import 'package:frontend/controllers/polygon_controller.dart';
@@ -51,7 +49,7 @@ class _PolygonScreenState extends State<PolygonScreen> {
               )
             : Stack(
                 children: [
-                  SizedBox(
+                  Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: GoogleMap(
@@ -97,7 +95,7 @@ class _PolygonScreenState extends State<PolygonScreen> {
                   Positioned(
                     bottom: 0,
                     left: size.width * 0.1,
-                    child: SizedBox(
+                    child: Container(
                       height: size.height * 0.1,
                       width: size.width * 0.8,
                       child: ElevatedButton(
@@ -110,9 +108,10 @@ class _PolygonScreenState extends State<PolygonScreen> {
                         onPressed: () async{
                           if (polylinePoints.length == 5) {
                             List<LatLng> latlng = [];
-                            for (var element in polylinePoints) {
+                            polylinePoints.forEach((element) {
                               latlng.add(element);
-                            }
+                            });
+                            print(latlng);
                             await polygon.createPolygon(latlng);
                             user.addUser(context,
                                 userId: widget.id,

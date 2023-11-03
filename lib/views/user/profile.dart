@@ -31,8 +31,6 @@
 //   }
 // }
 
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:frontend/common/jobs_card.dart';
 import 'package:frontend/controllers/auth_controller.dart';
@@ -41,9 +39,13 @@ import 'package:frontend/controllers/work_controller.dart';
 import 'package:frontend/core/buttons.dart';
 import 'package:frontend/views/auth/login.dart';
 import 'package:frontend/views/user/workfrom.dart';
+import 'package:frontend/views/workers/work_screen.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:line_icons/line_icons.dart';
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 
+import '../../pallete.dart';
 import '../../theme.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -95,13 +97,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const LoginScreen()));
+                                      builder: (context) => LoginScreen()));
                             },
                             // Navigator.push(
                             //   context,
                             //   MaterialPageRoute(builder: (context) => Settings()),
                             // );
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.logout,
                               size: 30,
                             )),
@@ -137,11 +139,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ProjectForm()),
+                    MaterialPageRoute(builder: (context) => ProjectForm()),
                   );
                 },
                 child: Button(size, "Add Work")),
-            SizedBox(
+            Container(
               height: size.height * 0.44,
               child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
@@ -158,13 +160,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
+Widget _buildQuoteItem(String title, String subTitle, IconData icon) {
+  return ListTile(
+    leading: Icon(icon),
+    title: Text(title),
+    subtitle: Text(subTitle),
+  );
+}
 
 class TabBarScreen extends StatelessWidget {
-  const TabBarScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return const DefaultTabController(
+    return DefaultTabController(
       length: 2, // Number of tabs
       child: Scaffold(
         body: Column(
@@ -189,22 +196,18 @@ class TabBarScreen extends StatelessWidget {
 }
 
 class MyQuotesTab extends StatelessWidget {
-  const MyQuotesTab({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Text('My Quotes Tab Content'),
     );
   }
 }
 
 class MyRequestsTab extends StatelessWidget {
-  const MyRequestsTab({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Text('My Requests Tab Content'),
     );
   }

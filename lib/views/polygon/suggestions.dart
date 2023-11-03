@@ -40,7 +40,7 @@ class _SugesstionScreenState extends State<SugesstionScreen> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.arrow_back,
                         size: 30,
                         color: Colors.black,
@@ -98,9 +98,9 @@ class FarmDataTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: ExpansionTile(
-        title: const Text(
+        title: Text(
           'Your Farm Data',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -206,7 +206,7 @@ class Insights extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Column(
         children: [
           ListTile(
@@ -215,9 +215,9 @@ class Insights extends StatelessWidget {
               style: h1.copyWith(fontWeight: FontWeight.w700),
             ),
           ),
-          const SizedBox(height: 15,),
+          SizedBox(height: 15,),
           ListTile(
-            title: Text('Crop Health: $health'),
+            title: Text('Crop Health: ${health}'),
             subtitle: Text(interpretCropHealth(health)),
             trailing: Container(
               width: 12,
@@ -228,9 +228,9 @@ class Insights extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 15,),
+          SizedBox(height: 15,),
           ListTile(
-            title: Text('Water Stress: $waterStresss'),
+            title: Text('Water Stress: ${waterStresss}'),
             subtitle: Text(interpretWaterStress(waterStresss)),
             trailing: Container(
               width: 12,
@@ -241,9 +241,9 @@ class Insights extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 15,),
+          SizedBox(height: 15,),
           ListTile(
-            title: Text('Nitrogen Level: $nitrogen'),
+            title: Text('Nitrogen Level: ${nitrogen}'),
             subtitle: Text(interpretNitrogenLevel(nitrogen)),
             trailing: Container(
               width: 12,
@@ -254,9 +254,9 @@ class Insights extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 15,),
+          SizedBox(height: 15,),
           ListTile(
-            title: Text('Crop Maturity: $nitrogen'),
+            title: Text('Crop Maturity: ${nitrogen}'),
             subtitle: Text(interpretNitrogenLevel(nitrogen)),
             trailing: Container(
               width: 12,

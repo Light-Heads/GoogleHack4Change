@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/auth/form.dart';
+import 'package:frontend/auth/roles.dart';
 import 'package:frontend/controllers/polygon_controller.dart';
 import 'package:frontend/controllers/user_controller.dart';
 import 'package:frontend/views/classifier/disease.dart';
 import 'package:frontend/views/commodity/commodityview.dart';
 import 'package:frontend/views/home/homepage.dart';
+import 'package:frontend/views/polygon/polygon.dart';
 
 import 'package:frontend/views/user/profile.dart';
 import 'package:get/get.dart';
@@ -34,12 +37,12 @@ class _NavigationState extends State<Navigation> {
               FutureBuilder(
                 future: polygon.getData(user.user.value.polygonId.toString()),
                 builder: (context, snapshot) {
-                  return const Homepage();
+                  return Homepage();
                 },
               ),
-              const DiseaseView(),
-              const CommodityView(),
-              const ProfileScreen(),
+              DiseaseView(),
+              CommodityView(),
+              ProfileScreen(),
             ],
           ),
         ),

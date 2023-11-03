@@ -1,11 +1,7 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 import 'package:frontend/theme.dart';
 
 class ProjectForm extends StatefulWidget {
-  const ProjectForm({super.key});
-
   @override
   _ProjectFormState createState() => _ProjectFormState();
 }
@@ -20,7 +16,7 @@ class _ProjectFormState extends State<ProjectForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
@@ -34,22 +30,22 @@ class _ProjectFormState extends State<ProjectForm> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.arrow_back,
                         size: 30,
                         color: Colors.black,
                       ),
                     )),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Text(
                       "New Work",
                       style: h1.copyWith(fontSize: 34, color: Colors.black),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
               TextFormField(
                 controller: _titleController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Title',
                   border: OutlineInputBorder(),
                 ),
@@ -60,10 +56,10 @@ class _ProjectFormState extends State<ProjectForm> {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               TextFormField(
                 controller: _requirementsController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Requirements',
                   border: OutlineInputBorder(),
                 ),
@@ -74,10 +70,10 @@ class _ProjectFormState extends State<ProjectForm> {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               TextFormField(
                 controller: _priceController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Price',
                   border: OutlineInputBorder(),
                 ),
@@ -88,7 +84,7 @@ class _ProjectFormState extends State<ProjectForm> {
                   return null;
                 },
               ),
-              const SizedBox(height: 32),
+              SizedBox(height: 32),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -97,7 +93,7 @@ class _ProjectFormState extends State<ProjectForm> {
                     // _titleController.text, _requirementsController.text, _priceController.text
                   }
                 },
-                child: const Text('Submit'),
+                child: Text('Submit'),
               ),
             ],
           ),

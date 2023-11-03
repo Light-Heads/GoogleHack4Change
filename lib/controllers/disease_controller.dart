@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_brace_in_string_interps
-
 import 'dart:io';
 import 'package:dio/dio.dart' as d;
 import 'package:frontend/config.dart';

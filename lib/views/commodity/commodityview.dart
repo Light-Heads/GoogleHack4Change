@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/controllers/commodity_controller.dart';
@@ -63,12 +61,12 @@ class _CommodityViewState extends State<CommodityView> {
                 ),
                 Obx(() =>
                   (commodity.isDataLoading.value)?
-                  const Center(child: CircularProgressIndicator()):
+                  Center(child: CircularProgressIndicator()):
                   SizedBox(
                       height: size.height*0.7,
                       width: size.width,
                       child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
+                          physics: BouncingScrollPhysics(),
                           itemCount: commodity.commodity.value.records!.length,
                           itemBuilder: (context, i){
                             return Padding(
@@ -119,7 +117,7 @@ class _CommodityViewState extends State<CommodityView> {
                 SizedBox(height: size.height*0.01,),
                 Text(
                   '${com.variety} ',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Color(0xFF0F0F0F),
                     fontSize: 20,
                     fontFamily: 'Gilroy',
@@ -129,7 +127,7 @@ class _CommodityViewState extends State<CommodityView> {
                 ),
                 SizedBox(height: size.height*0.01,),
                 Text("${com.market} Market", style: GoogleFonts.inter(
-                  color: const Color(0xFF4D4D4D),
+                  color: Color(0xFF4D4D4D),
                   fontSize: 14.30,
                   fontWeight: FontWeight.w400,
                   letterSpacing: -0.36,
@@ -141,7 +139,7 @@ class _CommodityViewState extends State<CommodityView> {
                 Text(
                   '₹${com.modalPrice}',
                   style: GoogleFonts.inter(
-                    color: const Color(0xFF458E62),
+                    color: Color(0xFF458E62),
                     fontSize: 32.17,
                     fontWeight: FontWeight.w400,
                     letterSpacing: -1.13,
@@ -149,7 +147,7 @@ class _CommodityViewState extends State<CommodityView> {
                 ),
                 SizedBox(height: size.height*0.01,),
                 Text("Modal Price", style: GoogleFonts.inter(
-                  color: const Color(0xFF4D4D4D),
+                  color: Color(0xFF4D4D4D),
                   fontSize: 14.30,
                   fontWeight: FontWeight.w400,
                   letterSpacing: -0.36,

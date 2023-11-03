@@ -1,8 +1,8 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:frontend/controllers/auth_controller.dart';
 import 'package:frontend/controllers/disease_controller.dart';
+import 'package:frontend/controllers/location_controller.dart';
 import 'package:frontend/pallete.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -32,11 +32,13 @@ class _DiseaseViewState extends State<DiseaseView> {
 
   File? selectedImage;
   var disease = Get.put(DiseaseController());
-  final TextEditingController _usernameController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     valueNotifier.value = 64;
     var size = MediaQuery.of(context).size;
+    var auth = Get.put(AuthController());
     return Scaffold(
       body: SafeArea(
         child: SizedBox(
@@ -86,10 +88,10 @@ class _DiseaseViewState extends State<DiseaseView> {
                             width: size.width * 0.84,
                             height: size.height * 0.2,
                             decoration: ShapeDecoration(
-                              color: const Color(0xFFF4FCF7),
+                              color: Color(0xFFF4FCF7),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(7)),
-                              shadows: const [
+                              shadows: [
                                 BoxShadow(
                                   color: Color(0x28000000),
                                   blurRadius: 43,
@@ -101,13 +103,23 @@ class _DiseaseViewState extends State<DiseaseView> {
                             child: Image.file(
                                 selectedImage!)) // Show the picked image
                         : Container(
+                            child: Center(
+                              child: IconButton(
+                                iconSize: 44,
+                                icon: Icon(
+                                  LineIcons.camera,
+                                  color: Pallete.greenColor,
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
                             width: size.width * 0.84,
                             height: size.height * 0.2,
                             decoration: ShapeDecoration(
-                              color: const Color(0xFFF4FCF7),
+                              color: Color(0xFFF4FCF7),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(7)),
-                              shadows: const [
+                              shadows: [
                                 BoxShadow(
                                   color: Color(0x28000000),
                                   blurRadius: 43,
@@ -116,23 +128,13 @@ class _DiseaseViewState extends State<DiseaseView> {
                                 )
                               ],
                             ),
-                            child: Center(
-                              child: IconButton(
-                                iconSize: 44,
-                                icon: const Icon(
-                                  LineIcons.camera,
-                                  color: Pallete.greenColor,
-                                ),
-                                onPressed: () {},
-                              ),
-                            ),
                           ),
                   ),
                 ),
                 selectedImage != null
                     ? Obx(
                         () => (disease.isLoading.value)
-                            ? const Center(child: CircularProgressIndicator())
+                            ? Center(child: CircularProgressIndicator())
                             : Padding(
                                 padding: const EdgeInsets.all(28.0),
                                 child: SizedBox(
@@ -180,7 +182,7 @@ class _DiseaseViewState extends State<DiseaseView> {
                                           style: h1.copyWith(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w600)),
-                                      SizedBox(
+                                      Container(
                                         width: size.width * 0.8,
                                         height: size.height * 0.6,
                                         child: Text(
@@ -192,7 +194,7 @@ class _DiseaseViewState extends State<DiseaseView> {
                                 ),
                               ),
                       )
-                    : const SizedBox()
+                    : SizedBox()
               ],
             ),
           ),
@@ -203,11 +205,11 @@ class _DiseaseViewState extends State<DiseaseView> {
 
   showLoaderDialog(BuildContext context) {
     AlertDialog alert = AlertDialog(
-      content: Row(
+      content: new Row(
         children: [
-          const CircularProgressIndicator(),
+          CircularProgressIndicator(),
           Container(
-              margin: const EdgeInsets.only(left: 7), child: const Text("Uploading...")),
+              margin: EdgeInsets.only(left: 7), child: Text("Uploading...")),
         ],
       ),
     );
@@ -241,8 +243,8 @@ class _DiseaseViewState extends State<DiseaseView> {
             content: SizedBox(
               width: MediaQuery.of(context).size.width * 0.5,
               height: MediaQuery.of(context).size.height * 0.1,
-              child: const Column(
-                children: [
+              child: Column(
+                children: const [
                   Text(
                     'No File choosen',
                   ),

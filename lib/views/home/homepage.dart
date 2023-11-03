@@ -10,6 +10,7 @@ import 'package:frontend/pallete.dart';
 import 'package:frontend/theme.dart';
 import 'package:frontend/views/weather/weather_detail.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../polygon/suggestions.dart';
 
@@ -64,14 +65,14 @@ class _HomepageState extends State<Homepage> {
                             color: Pallete.veryLightGreenColor,
                             width: size.width,
                             child: Padding(
-                              padding: const EdgeInsets.only(
+                              padding: EdgeInsets.only(
                                   left: 18.0, right: 18, top: 18, bottom: 2),
                               child: Stack(
                                 children: [
                                   Positioned(
                                     right: 0,
                                     child: SizedBox(
-                                      child: SizedBox(
+                                      child: Container(
                                           width: size.width * 0.5,
                                           child: Image.asset(
                                             'assets/images/All.png',
@@ -83,12 +84,12 @@ class _HomepageState extends State<Homepage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(left: 18.0),
+                                        padding: EdgeInsets.only(left: 18.0),
                                         child: Row(
                                           children: [
                                             Image.asset(
                                                 'assets/images/Location.png'),
-                                            const SizedBox(
+                                            SizedBox(
                                               width: 5,
                                             ),
                                             Text(
@@ -127,7 +128,7 @@ class _HomepageState extends State<Homepage> {
                                                       ),
                                                     ),
                                                     Padding(
-                                                      padding: const EdgeInsets.only(
+                                                      padding: EdgeInsets.only(
                                                           top: 8.0),
                                                       child: Text('Kelvin',
                                                           style: sub1.copyWith(
@@ -172,14 +173,14 @@ class _HomepageState extends State<Homepage> {
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsets.only(right: 18.0),
+                                                EdgeInsets.only(right: 18.0),
                                             child: InkWell(
                                                 onTap: () {
                                                   Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            const WeatherDetail()),
+                                                            WeatherDetail()),
                                                   );
                                                 },
                                                 child:
@@ -201,7 +202,7 @@ class _HomepageState extends State<Homepage> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16),
                               ),
-                              shadows: const [
+                              shadows: [
                                 BoxShadow(
                                   color: Color(0x3F000000),
                                   blurRadius: 34,
@@ -281,7 +282,7 @@ class _HomepageState extends State<Homepage> {
                                   SizedBox(
                                     height: size.height * 0.01,
                                   ),
-                                  const Center(
+                                  Center(
                                       child: Text("Nitrogen leves are Good")),
                                 ],
                               ),
@@ -303,27 +304,7 @@ class _HomepageState extends State<Homepage> {
                               );
                             },
                             child: Container(
-                              width: size.width * 0.9,
-                              height: size.height * 0.07,
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 5,
-                                    blurRadius: 27,
-                                    offset: const Offset(
-                                        0, 3), // changes position of shadow
-                                  ),
-                                ],
-                                color: Pallete.greenColor,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(16)),
-                                // image: DecorationImage(
-                                //   image: AssetImage("assets/images/satelite.gif"),
-                                //   fit: BoxFit.cover,
-                                // ),
-                              ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   'View Suggestions',
                                   style: TextStyle(
@@ -334,6 +315,26 @@ class _HomepageState extends State<Homepage> {
                                     letterSpacing: -0.80,
                                   ),
                                 ),
+                              ),
+                              width: size.width * 0.9,
+                              height: size.height * 0.07,
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 27,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                                color: Pallete.greenColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                                // image: DecorationImage(
+                                //   image: AssetImage("assets/images/satelite.gif"),
+                                //   fit: BoxFit.cover,
+                                // ),
                               ),
                             ),
                           ),

@@ -24,17 +24,17 @@ class AuthController extends GetxController {
         );
         UserCredential userCredential =
             await auth.signInWithCredential(credential);
+        print('New User: ${userCredential.additionalUserInfo!.isNewUser}');
         userCredential.additionalUserInfo!.isNewUser
-            // ignore: use_build_context_synchronously
             ? Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const RoleSelectionScreen();
+                return RoleSelectionScreen();
               }))
-            // ignore: use_build_context_synchronously
             : Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const RoleLoader();
+                return RoleLoader();
               }));
       }
     } catch (e) {
+      print(e);
       showSnackBar(context, e.toString());
     }
   }
