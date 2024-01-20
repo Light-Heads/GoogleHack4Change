@@ -24,22 +24,26 @@ class PolygonController extends GetxController {
   var ndwi = PolyStatsModel().obs;
 
   createPolygon(List<LatLng> coordinates) async {
-    var res = await dio.post(
-        'http://api.agromonitoring.com/agro/1.0/polygons?appid=${agroMonitoringAPIKey}',
-        data: {
-          "name": "Polygon 1",
-          "geo_json": {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-              "type": "Polygon",
-              "coordinates": [
-                coordinates.map((e) => [e.longitude, e.latitude]).toList()
-              ],
+    try {
+      var res = await dio.post(
+          'http://api.agromonitoring.com/agro/1.0/polygons?appid=${agroMonitoringAPIKey}',
+          data: {
+            "name": "Polygon 1",
+            "geo_json": {
+              "type": "Feature",
+              "properties": {},
+              "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                  coordinates.map((e) => [e.longitude, e.latitude]).toList()
+                ],
+              }
             }
-          }
-        });
-    polygondata.value = PolygonModel.fromMap(res.data);
+          });
+      polygondata.value = PolygonModel.fromMap(res.data);
+    } catch (e) {
+      print(e);
+    }
   }
 
   getData(String polygonId) async {
@@ -63,7 +67,6 @@ class PolygonController extends GetxController {
   }
 
   getSatelliteImagery(String polygonId) async {
-    
     final DateTime now = DateTime.now();
     final DateTime end = now;
     final DateTime start = now.subtract(Duration(days: 16));
