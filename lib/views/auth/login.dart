@@ -94,11 +94,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: sub1,
                           ),
                           Text(
-                            'You have been missed!',
+                            AppLocalizations.of(context)!.missed,
                             style: h1,
                           ),
                           Text(
-                            'Login to explore options',
+                            AppLocalizations.of(context)!.explore,
                             style: h1,
                           ),
                           const Spacer(),
@@ -126,9 +126,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 20,
                         width: 20,
                       ),
-                      const Text(
-                        'Login with Google',
+                      Text(
+                        AppLocalizations.of(context)!.buttonLogin,
                         style: TextStyle(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),

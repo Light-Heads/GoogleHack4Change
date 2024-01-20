@@ -185,7 +185,7 @@ class _HomepageState extends State<Homepage> {
                                                   );
                                                 },
                                                 child:
-                                                    Button(size, "View More")),
+                                                    Button(size, AppLocalizations.of(context)!.viewMore)),
                                           ),
                                         ],
                                       )
@@ -226,7 +226,7 @@ class _HomepageState extends State<Homepage> {
                                     height: size.height * 0.01,
                                   ),
                                   Text(
-                                    "This data directly comes from satellite",
+                                    AppLocalizations.of(context)!.directSatellite,
                                     style: sub1,
                                   ),
                                   SizedBox(
@@ -248,7 +248,8 @@ class _HomepageState extends State<Homepage> {
                                               height: size.height * 0.02,
                                             ),
                                             Text(
-                                              "Crop Health",
+                                              AppLocalizations.of(context)!
+                                                  .health,
                                               style: h1.copyWith(
                                                   fontWeight: FontWeight.w700,
                                                   fontSize: 14),
@@ -267,7 +268,8 @@ class _HomepageState extends State<Homepage> {
                                               height: size.height * 0.02,
                                             ),
                                             Text(
-                                              "Water Stress",
+                                              AppLocalizations.of(context)!
+                                                  .waterStress,
                                               style: h1.copyWith(
                                                   fontWeight: FontWeight.w700,
                                                   fontSize: 14),
@@ -308,7 +310,7 @@ class _HomepageState extends State<Homepage> {
                             child: Container(
                               child: Center(
                                 child: Text(
-                                  'View Suggestions',
+                                  AppLocalizations.of(context)!.viewSuggestions,
                                   style: TextStyle(
                                     color: Pallete.whiteColor,
                                     fontSize: 17.96,

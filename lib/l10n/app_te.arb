@@ -6,5 +6,17 @@
     "addWork": "పని జోడించండి",
     "farmer": "రైతు",
     "welcome": "స్వాగతం",
-    "current": "ప్రస్తుత పని"
+    "current": "వ్యవసాయ పరిస్థితులు",
+    "missed": "మీరు మిస్ అయ్యారు!",
+    "explore": "అన్వేషించడానికి లాగిన్ చేయండి",
+    "buttonLogin": "Google తో లాగిన్ చేయండి",
+    "viewMore": "మరిన్ని చూడండి",
+    "directSatellite": "ఈ డేటా నేరుగా ఉపగ్రహం నుండి వస్తుంది",
+    "viewSuggestions": "సూచనలను చూడండి",
+    "suggestions": "సూచనలు",
+    "yourFarmData": "మీ వ్యవసాయ డేటా",
+    "basedSatellite": "ఉపగ్రహ డేటా ఆధారంగా",
+    "insights": "అంతర్దృష్టులు",
+    "health": "పంట ఆరోగ్యం",
+    "waterStress": "నీటి ఒత్తిడి"
 }

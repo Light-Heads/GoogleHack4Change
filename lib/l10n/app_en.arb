@@ -35,5 +35,53 @@
     "current" : "Current Conditions",
     "@current": {
         "description": "Current Conditions page"
+    },
+    "missed": "You have been missed!",
+    "@missed": {
+        "description": "Missed message"
+    },
+    "explore": "Login to explore options",
+    "@explore": {
+        "description": "Explore options"
+    },
+    "buttonLogin": "Login with Google",
+    "@buttonLogin": {
+        "description": "Login with Google"
+    },
+    "viewMore": "View More",
+    "@viewMore": {
+        "description": "View More"
+    },
+    "directSatellite": "This data directly comes from satellite",
+    "@directSatellite": {
+        "description": "Direct satellite data"
+    },
+    "viewSuggestions": "View Suggestions",
+    "@viewSuggestions": {
+        "description": "View Suggestions"
+    },
+    "suggestions": "Suggestions",
+    "@suggestions": {
+        "description": "Suggestions"
+    },
+    "yourFarmData": "Your Farm Data",
+    "@yourFarmData": {
+        "description": "Your Farm Data"
+    },
+    "basedSatellite": "Based on satellite data",
+    "@basedSatellite": {
+        "description": "Based on satellite data"
+    },
+    "insights": "Insights",
+    "@insights": {
+        "description": "Insights"
+    },
+    "health": "Crop Health",
+    "@health": {
+        "description": "Crop Health"
+    },
+    "waterStress": "Water Stress",
+    "@waterStress": {
+        "description": "Water Stress"
     }
 }

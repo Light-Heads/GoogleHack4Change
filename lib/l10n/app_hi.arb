@@ -6,6 +6,18 @@
     "addWork": "काम जोड़ें",
     "farmer": "किसान",
     "welcome": "स्वागत हे!",
-    "current" : "वर्तमान काम"
+    "current" : "खेत की स्थिति",
+    "missed" : "आपको याद किया गया!",
+    "explore" : "विकल्प तलाशने के लिए लॉगिन करें",
+    "buttonLogin" : "Google से लॉगिन करें",
+    "viewMore": "और देखें",
+    "directSatellite": "ये डेटा सीधे सैटेलाइट से आता है",
+    "viewSuggestions": "सुझाव देखें",
+    "suggestions": "सुझाव",
+    "yourFarmData": "आपके खेत के डेटा",
+    "basedSatellite": "सैटेलाइट डेटा पर आधारित",
+    "insights": "अंतर्दृष्टि",
+    "health": "फसल स्वास्थ्य",
+    "waterStress": "पानी तनाव"
 
 }

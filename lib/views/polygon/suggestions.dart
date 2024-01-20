@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import '../../controllers/polygon_controller.dart';
 import '../../pallete.dart';
 import '../../theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class SugesstionScreen extends StatefulWidget {
   final String nitrogen;
@@ -53,14 +55,14 @@ class _SugesstionScreenState extends State<SugesstionScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Suggestions",
+                  AppLocalizations.of(context)!.suggestions,
                       style: h1.copyWith(fontSize: 34, color: Colors.black),
                     ),
                     SizedBox(
                       height: size.height * 0.01,
                     ),
                     Text(
-                      "Based on the satellite data",
+                      AppLocalizations.of(context)!.basedSatellite,
                       style: sub1,
                     ),
                     SizedBox(
@@ -71,7 +73,7 @@ class _SugesstionScreenState extends State<SugesstionScreen> {
                       height: size.height * 0.03,
                     ),
                     Text(
-                      "Insights",
+                      AppLocalizations.of(context)!.insights,
                       style: sub1.copyWith(
                           fontSize: 20,
                           fontWeight: FontWeight.w800,
@@ -101,7 +103,7 @@ class FarmDataTile extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: ExpansionTile(
         title: Text(
-          'Your Farm Data',
+          AppLocalizations.of(context)!.yourFarmData,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         children: [
