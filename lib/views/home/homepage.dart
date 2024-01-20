@@ -11,6 +11,7 @@ import 'package:frontend/theme.dart';
 import 'package:frontend/views/weather/weather_detail.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../polygon/suggestions.dart';
 
@@ -217,7 +218,8 @@ class _HomepageState extends State<Homepage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Current Conditions",
+                                    AppLocalizations.of(context)!
+                                        .current,
                                     style: h1,
                                   ),
                                   SizedBox(
@@ -228,7 +230,7 @@ class _HomepageState extends State<Homepage> {
                                     style: sub1,
                                   ),
                                   SizedBox(
-                                    height: size.height * 0.03,
+                                    height: size.height * 0.02
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(18.0),

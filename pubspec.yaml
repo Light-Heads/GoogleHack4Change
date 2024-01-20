@@ -45,7 +45,7 @@ dependencies:
   google_nav_bar: ^5.0.6
   google_sign_in: ^6.1.4
   image_picker: ^1.0.2
-  intl: 0.18.0
+  intl: 0.18.1
   line_icons: ^2.0.3
   logger: ^2.0.1
   permission_handler: ^10.4.3
