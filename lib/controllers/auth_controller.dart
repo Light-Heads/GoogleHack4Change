@@ -12,6 +12,7 @@ class AuthController extends GetxController {
   Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
   Future<void> signInWithGoogle(BuildContext context) async {
     try {
+      await GoogleSignIn().signOut();
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       final GoogleSignInAuthentication? googleAuth =

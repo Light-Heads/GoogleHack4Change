@@ -3,6 +3,7 @@ import 'package:frontend/auth/form.dart';
 import 'package:frontend/auth/roles.dart';
 import 'package:frontend/controllers/polygon_controller.dart';
 import 'package:frontend/controllers/user_controller.dart';
+import 'package:frontend/views/chat/views/global_chat.dart';
 import 'package:frontend/views/classifier/disease.dart';
 import 'package:frontend/views/commodity/commodityview.dart';
 import 'package:frontend/views/home/homepage.dart';
@@ -43,6 +44,7 @@ class _NavigationState extends State<Navigation> {
               DiseaseView(),
               CommodityView(),
               ProfileScreen(),
+              MobileChatScreen(),
             ],
           ),
         ),
@@ -87,6 +89,7 @@ class _NavigationState extends State<Navigation> {
                     icon: LineIcons.user,
                     text: 'Profile',
                   ),
+                  GButton(icon: LineIcons.chair, text: 'Chat',)
                 ],
               ),
             ),
