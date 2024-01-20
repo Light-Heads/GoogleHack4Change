@@ -44,7 +44,7 @@ import 'package:frontend/views/workers/work_screen.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../pallete.dart';
 import '../../theme.dart';
 
@@ -84,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Profile",
+                        AppLocalizations.of(context)!.profile,
                         style: h1.copyWith(fontSize: 34, color: Colors.black),
                       ),
                       Padding(

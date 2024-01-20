@@ -145,7 +145,7 @@ class _CommodityViewState extends State<CommodityView> {
                     letterSpacing: -1.13,
                   ),
                 ),
-                SizedBox(height: size.height*0.01,),
+                SizedBox(height: size.height*0.005,),
                 Text("Modal Price", style: GoogleFonts.inter(
                   color: Color(0xFF4D4D4D),
                   fontSize: 14.30,

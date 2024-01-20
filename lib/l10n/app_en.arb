@@ -27,5 +27,13 @@
     "farmer": "Farmer",
     "@farmer": {
         "description": "Description about a farmer"
+    },
+    "welcome": "Welcome",
+    "@welcome": {
+        "description": "Welcome message"
+    },
+    "current" : "Current Conditions",
+    "@current": {
+        "description": "Current Conditions page"
     }
 }

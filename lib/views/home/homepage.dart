@@ -11,6 +11,7 @@ import 'package:frontend/theme.dart';
 import 'package:frontend/views/weather/weather_detail.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../polygon/suggestions.dart';
 
