@@ -135,3 +135,5 @@ uploads/videos/*
 
 # pakage-lock.json
 package-lock.json
+pnpm-lock.yaml
+./pnpm-lock.yaml
