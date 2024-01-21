@@ -119,16 +119,11 @@ class _HomepageState extends State<Homepage> {
                                       builder: (context) => WeatherDetail()),
                                 );
                               },
-                              child: Container(
-                                height: size.height * 0.2,
-                                color: Pallete.veryLightGreenColor,
-                                width: size.width,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 18.0,
-                                      right: 18,
-                                      top: 18,
-                                      bottom: 2),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  color: Pallete.veryLightGreenColor,
+                                  width: size.width,
                                   child: Stack(
                                     children: [
                                       Positioned(
@@ -485,7 +480,9 @@ class _HomepageState extends State<Homepage> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
+                                               
                                                 Container(
+          
                                                   width: size.width * 0.13,
                                                   height: size.height * 0.05,
                                                   child: IconButton(
