@@ -83,7 +83,6 @@ class _NavigationState extends State<Navigation> {
                           ),
                           color: Pallete.whiteColor,
                         ),
-                        height: size.height * 0.07,
                         width: size.width,
                         child: BottomNavigationBar(
                           type: BottomNavigationBarType.fixed,
