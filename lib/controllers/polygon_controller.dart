@@ -16,6 +16,7 @@ class PolygonController extends GetxController {
   var soilMoisture = SoilMoistureModel().obs;
   var isLoading = false.obs;
   var uvIndex = 0.0.obs;
+  var polygonImage = ''.obs;
   var ndvi = PolyStatsModel().obs;
   var evi = PolyStatsModel().obs;
   var evi2 = PolyStatsModel().obs;
@@ -46,10 +47,21 @@ class PolygonController extends GetxController {
     }
   }
 
+  getImage(String polygonId) async {
+    try {
+      var res = await dio.get(
+          'http://api.agromonitoring.com/agro/1.0/image/search?start=1614556800&end=1705800584&polyid=${polygonId}&appid=${agroMonitoringAPIKey}');
+      polygonImage.value = res.data[0]['image'];
+    } catch (e) {
+      print(e);
+    }
+  }
+
   getData(String polygonId) async {
     getSoilMoisture(polygonId);
     getUVIndex(polygonId);
     getSatelliteImagery(polygonId);
+    getImage(polygonId);
   }
 
   getSoilMoisture(String polygonId) async {

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:frontend/config.dart';
+import 'package:frontend/controllers/language_controller.dart';
 import 'package:frontend/controllers/polygon_controller.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +8,7 @@ class ChatController extends GetxController {
   final Dio _dio = Dio();
   final polygon = Get.put(PolygonController());
   final MessagesList = [].obs;
+  final chat = Get.put(LanguageController());
 
   void sendTextMessage(String text) async {
     final ndvi = polygon.ndvi.value.mean;
@@ -29,7 +31,7 @@ class ChatController extends GetxController {
             "instances": [
               {
                 "context":
-                    "Answer in  Compare the agricultural health and productivity of a given region by analyzing the following vegetation indices: NDVI (Normalized Difference Vegetation Index): ${ndvi}, EVI (Enhanced Vegetation Index): ${evi}, EVI2 (Second-Generation Enhanced Vegetation Index): ${evi2}, NRI (Normalized Burn Ratio): ${nri}, DSWI (Drought Stress Water Index): ${dswi}, and NDWI (Normalized Difference Water Index): ${ndwi}. Provide insights into crop vitality, drought stress, and water availability based on the values of these indices for comprehensive agricultural planning and management",
+                    "Answer in ${chat.value.value} Compare the agricultural health and productivity of a given region by analyzing the following vegetation indices: NDVI (Normalized Difference Vegetation Index): ${ndvi}, EVI (Enhanced Vegetation Index): ${evi}, EVI2 (Second-Generation Enhanced Vegetation Index): ${evi2}, NRI (Normalized Burn Ratio): ${nri}, DSWI (Drought Stress Water Index): ${dswi}, and NDWI (Normalized Difference Water Index): ${ndwi}. Provide insights into crop vitality, drought stress, and water availability based on the values of these indices for comprehensive agricultural planning and management",
                 "examples": [],
                 "messages": [
                   {"author": "user", "content": "${text}"}

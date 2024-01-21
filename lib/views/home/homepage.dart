@@ -67,147 +67,183 @@ class _HomepageState extends State<Homepage> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Container(
-                              height: size.height * 0.32,
-                              color: Pallete.veryLightGreenColor,
-                              width: size.width,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    left: 18.0, right: 18, top: 18, bottom: 2),
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      right: 0,
-                                      child: SizedBox(
-                                        child: Container(
-                                            width: size.width * 0.5,
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WeatherDetail()),
+                                );
+                              },
+                              child: Container(
+                                height: size.height * 0.2,
+                                color: Pallete.veryLightGreenColor,
+                                width: size.width,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 18.0,
+                                      right: 18,
+                                      top: 18,
+                                      bottom: 2),
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
+                                        right: 0,
+                                        child: SizedBox(
+                                          child: Container(
+                                            width: size.width * 0.3,
                                             child: Image.asset(
                                               'assets/images/All.png',
-                                            )),
-                                      ),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(left: 18.0),
-                                          child: Row(
-                                            children: [
-                                              Image.asset(
-                                                  'assets/images/Location.png'),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                location.currentAddress
-                                                    .toString(),
-                                                style: sub1,
-                                              )
-                                            ],
+                                            ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: size.height * 0.02,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 18.0),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        '${finalweathertemp.toString().substring(0,4)}°',
-                                                        style: const TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 37,
-                                                          fontFamily: 'Gilroy',
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          letterSpacing: 1.12,
-                                                        ),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.only(left: 18.0),
+                                            child: Row(
+                                              children: [
+                                                Image.asset(
+                                                    'assets/images/Location.png'),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  location.currentAddress
+                                                      .toString(),
+                                                  style: sub1,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: size.height * 0.01,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 18.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            '${finalweathertemp.toString().substring(0, 4)}°',
+                                                            style:
+                                                                const TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 37,
+                                                              fontFamily:
+                                                                  'Gilroy',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              letterSpacing:
+                                                                  1.12,
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    top: 8.0),
+                                                            child: Text(
+                                                                'Celcius',
+                                                                style: sub1.copyWith(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontSize:
+                                                                        18)),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 8.0),
-                                                        child: Text('Celcius',
-                                                            style: sub1.copyWith(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                                fontSize: 18)),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  Container(
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color:
-                                                              Color(0x3FACACAC),
-                                                          blurRadius: 19,
-                                                          offset: Offset(0, 9),
-                                                          spreadRadius: 0,
-                                                        )
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Container(
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Color(
+                                                                    0x3FACACAC),
+                                                                blurRadius: 19,
+                                                                offset: Offset(
+                                                                    0, 9),
+                                                                spreadRadius: 0,
+                                                              )
+                                                            ],
+                                                          ),
+                                                          child: Image.network(
+                                                            'https://openweathermap.org/img/wn/${weather.weather.value.weather![0].icon}@2x.png',
+                                                            scale: 2,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                            weather
+                                                                .weather
+                                                                .value
+                                                                .weather![0]
+                                                                .description
+                                                                .toString(),
+                                                            style: sub1),
                                                       ],
-                                                    ),
-                                                    child: Image.network(
-                                                      'https://openweathermap.org/img/wn/${weather.weather.value.weather![0].icon}@2x.png',
-                                                      scale: 2,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                      weather
-                                                          .weather
-                                                          .value
-                                                          .weather![0]
-                                                          .description
-                                                          .toString(),
-                                                      style: sub1),
-                                                ],
+                                                    )
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(right: 18.0),
-                                              child: InkWell(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              WeatherDetail()),
-                                                    );
-                                                  },
-                                                  child: Button(
-                                                      size, AppLocalizations.of(context)!.viewMore)),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ],
+                                              // Text(AppLocalizations.of(context)!
+                                              //     .viewMore),
+                                            ],
+                                          ),
+                                          // Row(
+                                          //   mainAxisAlignment:
+                                          //       MainAxisAlignment.end,
+                                          //   children: [
+                                          //     Padding(
+                                          //       padding:
+                                          //           EdgeInsets.only(right: 18.0),
+                                          //       child: InkWell(
+                                          //           onTap: () {
+                                          //             Navigator.push(
+                                          //               context,
+                                          //               MaterialPageRoute(
+                                          //                   builder: (context) =>
+                                          //                       WeatherDetail()),
+                                          //             );
+                                          //           },
+                                          //           child: Button(
+                                          //               size,
+                                          //               AppLocalizations.of(
+                                          //                       context)!
+                                          //                   .viewMore)),
+                                          //     ),
+                                          //   ],
+                                          // )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                             Container(
                               width: size.width * 0.9,
-                              height: size.height * 0.4,
+                              // height: size.height * 0.,
                               decoration: ShapeDecoration(
                                 color: Colors.white,
                                 shape: RoundedRectangleBorder(
@@ -235,7 +271,8 @@ class _HomepageState extends State<Homepage> {
                                       height: size.height * 0.01,
                                     ),
                                     Text(
-                                      AppLocalizations.of(context)!.directSatellite,
+                                      AppLocalizations.of(context)!
+                                          .directSatellite,
                                       style: sub1,
                                     ),
                                     SizedBox(
@@ -258,7 +295,7 @@ class _HomepageState extends State<Homepage> {
                                               ),
                                               Text(
                                                 AppLocalizations.of(context)!
-                                                  .health,
+                                                    .health,
                                                 style: h1.copyWith(
                                                     fontWeight: FontWeight.w700,
                                                     fontSize: 14),
@@ -278,7 +315,7 @@ class _HomepageState extends State<Homepage> {
                                               ),
                                               Text(
                                                 AppLocalizations.of(context)!
-                                                  .waterStress,
+                                                    .waterStress,
                                                 style: h1.copyWith(
                                                     fontWeight: FontWeight.w700,
                                                     fontSize: 14),
@@ -297,59 +334,65 @@ class _HomepageState extends State<Homepage> {
                                     ),
                                     Center(
                                         child: Text("Nitrogen leves are Good")),
+                                    SizedBox(
+                                      height: size.height * 0.02,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SugesstionScreen(
+                                                    nitrogen: nitrogen,
+                                                    waterStress: waterStress,
+                                                    health: health,
+                                                  )),
+                                        );
+                                      },
+                                      child: Container(
+                                        child: Center(
+                                          child: Text(
+                                            AppLocalizations.of(context)!
+                                                .viewSuggestions,
+                                            style: TextStyle(
+                                              color: Pallete.whiteColor,
+                                              fontSize: 17.96,
+                                              fontFamily: 'Gilroy',
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: -0.80,
+                                            ),
+                                          ),
+                                        ),
+                                        width: size.width * 0.9,
+                                        height: size.height * 0.07,
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.grey.withOpacity(0.5),
+                                              spreadRadius: 2,
+                                              blurRadius: 27,
+                                              offset: Offset(0,
+                                                  3), // changes position of shadow
+                                            ),
+                                          ],
+                                          color: Pallete.greenColor,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(16)),
+                                          // image: DecorationImage(
+                                          //   image: AssetImage("assets/images/satelite.gif"),
+                                          //   fit: BoxFit.cover,
+                                          // ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
                             ),
                             SizedBox(
                               height: size.height * 0.03,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SugesstionScreen(
-                                            nitrogen: nitrogen,
-                                            waterStress: waterStress,
-                                            health: health,
-                                          )),
-                                );
-                              },
-                              child: Container(
-                                child: Center(
-                                  child: Text(
-                                    AppLocalizations.of(context)!.viewSuggestions,
-                                    style: TextStyle(
-                                      color: Pallete.whiteColor,
-                                      fontSize: 17.96,
-                                      fontFamily: 'Gilroy',
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: -0.80,
-                                    ),
-                                  ),
-                                ),
-                                width: size.width * 0.9,
-                                height: size.height * 0.07,
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 5,
-                                      blurRadius: 27,
-                                      offset: Offset(
-                                          0, 3), // changes position of shadow
-                                    ),
-                                  ],
-                                  color: Pallete.greenColor,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(16)),
-                                  // image: DecorationImage(
-                                  //   image: AssetImage("assets/images/satelite.gif"),
-                                  //   fit: BoxFit.cover,
-                                  // ),
-                                ),
-                              ),
                             ),
                           ],
                         ),
