@@ -9,10 +9,13 @@ import 'package:frontend/core/buttons.dart';
 import 'package:frontend/core/utils.dart';
 import 'package:frontend/pallete.dart';
 import 'package:frontend/theme.dart';
+import 'package:frontend/views/classifier/disease.dart';
+import 'package:frontend/views/commodity/commodityview.dart';
 import 'package:frontend/views/weather/weather_detail.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:line_icons/line_icons.dart';
 
 import '../polygon/suggestions.dart';
 
@@ -41,7 +44,45 @@ class _HomepageState extends State<Homepage> {
     final controller = Get.put(CommodityController());
     final location = Get.put(LocationController());
     final weather = Get.put(WeatherController());
-    final services = Get.put(ServicesController());
+    // final services = Get.put(ServicesController());
+
+    final services = [
+      {
+        'name': AppLocalizations.of(context)!.addField,
+        'icon': LineIcons.tractor,
+        'onTap': () {}
+      },
+      {
+        'name': AppLocalizations.of(context)!.detect,
+        'icon': LineIcons.leaf,
+        'onTap': DiseaseView(),
+      },
+      {
+        'name': AppLocalizations.of(context)!.mandiPrice,
+        'icon': LineIcons.indianRupeeSign,
+        'onTap': CommodityView(),
+      },
+      {
+        'name': AppLocalizations.of(context)!.weather,
+        'icon': LineIcons.cloud,
+        'onTap': () {}
+      },
+      {
+        'name': AppLocalizations.of(context)!.market,
+        'icon': LineIcons.shoppingCart,
+        'onTap': () {}
+      },
+      {
+        'name': AppLocalizations.of(context)!.chat,
+        'icon': LineIcons.comment,
+        'onTap': () {}
+      },
+      {
+        'name': AppLocalizations.of(context)!.settings,
+        'icon': LineIcons.cog,
+        'onTap': () {}
+      },
+    ];
 
     return SafeArea(
       child: Scaffold(body: Obx(() {
@@ -421,14 +462,13 @@ class _HomepageState extends State<Homepage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Featured',
+                                      AppLocalizations.of(context)!.featured,
                                       style: h1,
                                     ),
                                     SizedBox(
                                       height: size.height * 0.01,
                                     ),
-                                    Obx(
-                                      () => GridView.builder(
+                                    GridView.builder(
                                         gridDelegate:
                                             SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 4,
@@ -436,7 +476,7 @@ class _HomepageState extends State<Homepage> {
                                           mainAxisSpacing: 12,
                                           childAspectRatio: 0.8,
                                         ),
-                                        itemCount: services.services.length,
+                                        itemCount: services.length,
                                         itemBuilder: (context, index) {
                                           return Container(
                                             child: Column(
@@ -454,16 +494,16 @@ class _HomepageState extends State<Homepage> {
                                                           context,
                                                           MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  services.services[
+                                                                  services[
                                                                               index]
                                                                           [
                                                                           'onTap']
                                                                       as Widget));
                                                     },
                                                     icon: Icon(
-                                                      services.services[index]
+                                                      services[index]
                                                           ['icon'] as IconData?,
-                                                      size: 30,
+                                                      size: 34,
                                                       color: Pallete.greenColor,
                                                     ),
                                                   ),
@@ -472,13 +512,13 @@ class _HomepageState extends State<Homepage> {
                                                     width: size.width * 0.14,
                                                     child: Center(
                                                       child: Text(
-                                                        services.services[index]
+                                                        services[index]
                                                             ['name'] as String,
                                                         maxLines: 2,
                                                         textAlign:
                                                             TextAlign.center,
                                                         style: TextStyle(
-                                                            fontSize: 9,
+                                                            fontSize: 11,
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             letterSpacing: 0.5),
@@ -491,7 +531,7 @@ class _HomepageState extends State<Homepage> {
                                         shrinkWrap: true,
                                         physics: NeverScrollableScrollPhysics(),
                                       ),
-                                    ),
+                                    
                                   ]),
                             ),
                             SizedBox(

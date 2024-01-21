@@ -139,5 +139,37 @@
     "moderatewater" : "Moderate Water",
     "@moderatewater": {
         "description": "Moderate Water"
+    },
+    "featured": "Featured",
+    "@featured": {
+        "description": "Featured"
+    },
+    "addField": "Add FarmField",
+    "@addField": {
+        "description": "Add FarmField"
+    },
+    "detect": "Detect Disease",
+    "@detect": {
+        "description": "Detect Disease"
+    },
+    "mandiPrice": "Mandi Prices",
+    "@mandiPrice": {
+        "description": "Mandi Prices"
+    },
+    "weather": "Weather",
+    "@weather": {
+        "description": "Weather"
+    },
+    "market": "Market",
+    "@market": {
+        "description": "Market"
+    },
+    "chat": "Chat",
+    "@chat": {
+        "description": "Chat"
+    },
+    "settings": "Settings",
+    "@settings": {
+        "description": "Settings"
     }
 }

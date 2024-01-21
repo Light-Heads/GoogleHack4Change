@@ -7,6 +7,7 @@ import 'package:frontend/config.dart';
 import 'package:frontend/core/utils.dart';
 import 'package:frontend/models/user.dart';
 import 'package:frontend/navigation.dart';
+import 'package:frontend/views/polygon/loader.dart';
 import 'package:frontend/views/workers/work_screen.dart';
 import 'package:get/get.dart';
 
@@ -66,7 +67,7 @@ class UserController extends GetxController {
       } else {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const Navigation()),
+          MaterialPageRoute(builder: (context) => const PolygonLoader()),
         );
       }
     } catch (e) {

@@ -7,6 +7,7 @@ import 'package:frontend/pallete.dart';
 
 import 'package:frontend/views/chat/views/global_chat.dart';
 import 'package:frontend/views/home/homepage.dart';
+import 'package:frontend/views/polygon/loader.dart';
 import 'package:frontend/views/user/profile.dart';
 
 import 'package:get/get.dart';
