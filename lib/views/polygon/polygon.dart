@@ -3,6 +3,7 @@ import 'package:frontend/controllers/location_controller.dart';
 import 'package:frontend/controllers/polygon_controller.dart';
 import 'package:frontend/controllers/user_controller.dart';
 import 'package:frontend/pallete.dart';
+import 'package:frontend/views/polygon/loader.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -14,6 +15,7 @@ class PolygonScreen extends StatefulWidget {
   final role;
   final email;
   final image;
+  final isLoggedIn;
   const PolygonScreen(
       {Key? key,
       this.id,
@@ -22,6 +24,7 @@ class PolygonScreen extends StatefulWidget {
       this.roleid,
       this.role,
       this.email,
+      this.isLoggedIn = false,
       this.image})
       : super(key: key);
 
@@ -105,7 +108,10 @@ class _PolygonScreenState extends State<PolygonScreen> {
                             borderRadius: BorderRadius.circular(200),
                           ),
                         ),
-                        onPressed: () async{
+                        onPressed: () async {
+                          if(widget.isLoggedIn == true){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const PolygonLoader()));
+                          }
                           if (polylinePoints.length == 5) {
                             List<LatLng> latlng = [];
                             polylinePoints.forEach((element) {
@@ -122,14 +128,17 @@ class _PolygonScreenState extends State<PolygonScreen> {
                                 image: widget.image,
                                 lat: location.position.latitude,
                                 long: location.position.longitude,
-                                polygonId: polygon.polygondata.value.id??"",
+                                polygonId: polygon.polygondata.value.id ?? "",
                                 district: location.district.value,
                                 city: location.city.value,
                                 state: location.state.value,
                                 locality: location.locality.value);
                           }
                         },
-                        child: const Text('Create Polygon', style: TextStyle(color: Colors.white),),
+                        child: const Text(
+                          'Create Polygon',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),

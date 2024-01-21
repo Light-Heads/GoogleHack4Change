@@ -8,7 +8,12 @@ import 'package:get/get.dart';
 class ChatController extends GetxController {
   final Dio _dio = Dio();
   final polygon = Get.put(PolygonController());
-  final MessagesList = [].obs;
+  final MessagesList = [
+    {
+      "author": "Sahay",
+      "content":
+          "Welcome to Sahay, I am Sahay, your personal assistant. I can help you with your queries regarding agriculture. I can also assist you in Hindi"}
+  ].obs;
   final chat = Get.put(LanguageController());
   final user = Get.put(UserController());
 
@@ -33,7 +38,7 @@ class ChatController extends GetxController {
             "instances": [
               {
                 "context":
-                    "Answer in ${chat.value.value} Compare the agricultural health and productivity of a given region by analyzing the following vegetation indices: NDVI (Normalized Difference Vegetation Index): ${ndvi}, EVI (Enhanced Vegetation Index): ${evi}, EVI2 (Second-Generation Enhanced Vegetation Index): ${evi2}, NRI (Normalized Burn Ratio): ${nri}, DSWI (Drought Stress Water Index): ${dswi}, and NDWI (Normalized Difference Water Index): ${ndwi}. Provide insights into crop vitality, drought stress, and water availability based on the values of these indices for comprehensive agricultural planning and management",
+                    "Answer in ${chat.value.value} Compare the agricultural health and productivity of a given region by analyzing the following vegetation indices: NDVI (Normalized Difference Vegetation Index): ${ndvi}, EVI (Enhanced Vegetation Index): ${evi}, EVI2 (Second-Generation Enhanced Vegetation Index): ${evi2}, NRI (Normalized Burn Ratio): ${nri}, DSWI (Drought Stress Water Index): ${dswi}, and NDWI (Normalized Difference Water Index): ${ndwi}. Provide insights into crop vitality, drought stress, and water availability based on the values of these indices for comprehensive agricultural planning and management. Dont give vague answers, give definitive suggestions.",
                 "examples": [],
                 "messages": [
                   {"author": "user", "content": "${text}"}
@@ -48,7 +53,7 @@ class ChatController extends GetxController {
             }
           });
       MessagesList.add({
-        "author": "bot",
+        "author": "Sahay",
         "content": response.data["predictions"][0]["candidates"][0]["content"]
       });
       print("response: ${response.data}");

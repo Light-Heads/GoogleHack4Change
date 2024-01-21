@@ -34,6 +34,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/common/jobs_card.dart';
 import 'package:frontend/controllers/auth_controller.dart';
+import 'package:frontend/controllers/nav_controller.dart';
 import 'package:frontend/controllers/user_controller.dart';
 import 'package:frontend/controllers/work_controller.dart';
 import 'package:frontend/core/buttons.dart';
@@ -69,6 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var auth = Get.put(AuthController());
     var user = Get.put(UserController());
     var work = Get.put(WorkController());
+    var nav = Get.put(NavigationController());
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -96,7 +98,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => LoginScreen()));
+                            nav.changeTabIndex(0);
+
                           },
+                          
                           // Navigator.push(
                           //   context,
                           //   MaterialPageRoute(builder: (context) => Settings()),

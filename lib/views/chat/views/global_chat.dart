@@ -39,7 +39,7 @@ class _MobileChatScreenState extends State<MobileChatScreen> {
               color: Colors.black,
             ),
           ),
-          title: const Text('#AskGPT'),
+          title: const Text('#AskSahay!'),
         ),
         body: Column(
           children: [

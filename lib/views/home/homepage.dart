@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/controllers/commodity_controller.dart';
+import 'package:frontend/controllers/language_controller.dart';
 import 'package:frontend/controllers/location_controller.dart';
 import 'package:frontend/controllers/polygon_controller.dart';
+import 'package:frontend/controllers/products_controller.dart';
 import 'package:frontend/controllers/services_controller.dart';
 import 'package:frontend/controllers/user_controller.dart';
 import 'package:frontend/controllers/weather_controller.dart';
 import 'package:frontend/core/buttons.dart';
 import 'package:frontend/core/utils.dart';
+import 'package:frontend/models/weather.dart';
 import 'package:frontend/pallete.dart';
 import 'package:frontend/theme.dart';
+import 'package:frontend/views/chat/views/global_chat.dart';
 import 'package:frontend/views/classifier/disease.dart';
 import 'package:frontend/views/commodity/commodityview.dart';
+import 'package:frontend/views/market/marketpage.dart';
+import 'package:frontend/views/polygon/polygon.dart';
+import 'package:frontend/views/user/profile.dart';
 import 'package:frontend/views/weather/weather_detail.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -28,6 +35,7 @@ class Homepage extends StatefulWidget {
 
 final polygon = Get.put(PolygonController());
 final user = Get.put(UserController());
+final product = Get.put(ProductController());
 
 class _HomepageState extends State<Homepage> {
   @override
@@ -35,6 +43,7 @@ class _HomepageState extends State<Homepage> {
     super.initState();
     Future.delayed(Duration.zero).then((value) async {
       await polygon.getSatelliteImagery(user.user.value.polygonId ?? "");
+      // await product.getAllProducts();
     });
   }
 
@@ -50,7 +59,9 @@ class _HomepageState extends State<Homepage> {
       {
         'name': AppLocalizations.of(context)!.addField,
         'icon': LineIcons.tractor,
-        'onTap': () {}
+        'onTap': PolygonScreen(
+          isLoggedIn: true,
+        )
       },
       {
         'name': AppLocalizations.of(context)!.detect,
@@ -65,22 +76,22 @@ class _HomepageState extends State<Homepage> {
       {
         'name': AppLocalizations.of(context)!.weather,
         'icon': LineIcons.cloud,
-        'onTap': () {}
+        'onTap': WeatherDetail()
       },
       {
         'name': AppLocalizations.of(context)!.market,
         'icon': LineIcons.shoppingCart,
-        'onTap': () {}
+        'onTap': ProductListing()
       },
       {
         'name': AppLocalizations.of(context)!.chat,
         'icon': LineIcons.comment,
-        'onTap': () {}
+        'onTap': MobileChatScreen()
       },
       {
         'name': AppLocalizations.of(context)!.settings,
         'icon': LineIcons.cog,
-        'onTap': () {}
+        'onTap': ProfileScreen()
       },
     ];
 
@@ -145,6 +156,7 @@ class _HomepageState extends State<Homepage> {
                                             padding:
                                                 EdgeInsets.only(left: 18.0),
                                             child: Row(
+                                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Image.asset(
                                                     'assets/images/Location.png'),
@@ -155,7 +167,83 @@ class _HomepageState extends State<Homepage> {
                                                   location.currentAddress
                                                       .toString(),
                                                   style: sub1,
-                                                )
+                                                ),
+                                                Spacer(),
+                                                Container(
+                                                  // drop down menu for selecting languages material ui
+                                                  margin: const EdgeInsets.only(
+                                                      top: 20, right: 20),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 20),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  child: DropdownButton<String>(
+                                                    dropdownColor:
+                                                        Colors.white,
+                                                    value: Get.find<
+                                                            LanguageController>()
+                                                        .value
+                                                        .value,
+                                                    icon: Icon(
+                                                      Icons.arrow_drop_down,
+                                                      color: Color.fromARGB(
+                                                          255, 0, 0, 0),
+                                                    ),
+                                                    iconSize: size.width * 0.07,
+                                                    elevation: 16,
+                                                    style: TextStyle(
+                                                        color: const Color
+                                                            .fromARGB(
+                                                            255, 0, 0, 0)),
+                                                    underline: SizedBox(),
+                                                    onChanged:
+                                                        (String? newValue) {
+                                                      if (newValue ==
+                                                          'English') {
+                                                        Get.find<
+                                                                LanguageController>()
+                                                            .updateLocale('en');
+                                                      } else if (newValue ==
+                                                          'हिंदी') {
+                                                        Get.find<
+                                                                LanguageController>()
+                                                            .updateLocale('hi');
+                                                      } else if (newValue ==
+                                                          'తెలుగు') {
+                                                        Get.find<
+                                                                LanguageController>()
+                                                            .updateLocale('te');
+                                                      }
+                                                    },
+                                                    items: <String>[
+                                                      'English',
+                                                      'हिंदी',
+                                                      'తెలుగు'
+                                                    ].map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                      return DropdownMenuItem<
+                                                          String>(
+                                                        value: value,
+                                                        child: Text(
+                                                          value,
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .normal,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }).toList(),
+                                                  ),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -464,71 +552,66 @@ class _HomepageState extends State<Homepage> {
                                       height: size.height * 0.01,
                                     ),
                                     GridView.builder(
-                                        gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 4,
-                                          crossAxisSpacing: 10,
-                                          mainAxisSpacing: 12,
-                                          childAspectRatio: 0.8,
-                                        ),
-                                        itemCount: services.length,
-                                        itemBuilder: (context, index) {
-                                          return Container(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                               
-                                                Container(
-          
-                                                  width: size.width * 0.13,
-                                                  height: size.height * 0.05,
-                                                  child: IconButton(
-                                                    onPressed: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  services[
-                                                                              index]
-                                                                          [
-                                                                          'onTap']
-                                                                      as Widget));
-                                                    },
-                                                    icon: Icon(
-                                                      services[index]
-                                                          ['icon'] as IconData?,
-                                                      size: 34,
-                                                      color: Pallete.greenColor,
-                                                    ),
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 4,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 12,
+                                        childAspectRatio: 0.8,
+                                      ),
+                                      itemCount: services.length,
+                                      itemBuilder: (context, index) {
+                                        return Container(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: size.width * 0.13,
+                                                height: size.height * 0.05,
+                                                child: IconButton(
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                services[index][
+                                                                        'onTap']
+                                                                    as Widget));
+                                                  },
+                                                  icon: Icon(
+                                                    services[index]['icon']
+                                                        as IconData?,
+                                                    size: 34,
+                                                    color: Pallete.greenColor,
                                                   ),
                                                 ),
-                                                Container(
-                                                    width: size.width * 0.14,
-                                                    child: Center(
-                                                      child: Text(
-                                                        services[index]
-                                                            ['name'] as String,
-                                                        maxLines: 2,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: TextStyle(
-                                                            fontSize: 11,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            letterSpacing: 0.5),
-                                                      ),
-                                                    ))
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                      ),
-                                    
+                                              ),
+                                              Container(
+                                                  width: size.width * 0.14,
+                                                  child: Center(
+                                                    child: Text(
+                                                      services[index]['name']
+                                                          as String,
+                                                      maxLines: 2,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontSize: 11,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          letterSpacing: 0.5),
+                                                    ),
+                                                  ))
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                      shrinkWrap: true,
+                                      physics: NeverScrollableScrollPhysics(),
+                                    ),
                                   ]),
                             ),
                             SizedBox(
