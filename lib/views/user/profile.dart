@@ -87,27 +87,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         AppLocalizations.of(context)!.profile,
                         style: h1.copyWith(fontSize: 34, color: Colors.black),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 28.0),
-                        child: IconButton(
-                            onPressed: () async {
-                              await auth.signOut();
-                              await user.signOut();
-                              Navigator.popUntil(context, (route) => false);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
-                            },
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => Settings()),
-                            // );
-                            icon: Icon(
-                              Icons.logout,
-                              size: 30,
-                            )),
-                      )
+                      IconButton(
+                          onPressed: () async {
+                            await auth.signOut();
+                            await user.signOut();
+                            Navigator.popUntil(context, (route) => false);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginScreen()));
+                          },
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => Settings()),
+                          // );
+                          icon: Icon(
+                            Icons.logout,
+                            size: 30,
+                          ))
                     ],
                   ),
                 ],

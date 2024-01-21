@@ -135,7 +135,7 @@
     "waterlimit": "Water Limit",
     "@waterlimit": {
         "description": "Water Limit"
-    }
+    },
     "moderatewater" : "Moderate Water",
     "@moderatewater": {
         "description": "Moderate Water"

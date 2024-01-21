@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/chat/controller/chat_controller.dart';
 import 'package:get/get.dart';
+import 'package:frontend/pallete.dart';
+
 
 class BottomChatField extends StatefulWidget {
   final String recieverUserId;
@@ -73,10 +75,10 @@ class _BottomChatFieldState extends State<BottomChatField> {
                 },
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Colors.grey,
+                  fillColor: Pallete.greenColor,
                   hintText: 'Type a message!',
                   hintStyle: const TextStyle(
-                    color: Colors.white54,
+                    color: Colors.white,
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20.0),
@@ -92,7 +94,7 @@ class _BottomChatFieldState extends State<BottomChatField> {
             Padding(
               padding: EdgeInsets.only(left: size.width * 0.005),
               child: CircleAvatar(
-                backgroundColor: Colors.grey,
+                backgroundColor: Pallete.greenColor,
                 radius: 25,
                 child: GestureDetector(
                   child: Icon(

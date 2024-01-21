@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:frontend/config.dart';
 import 'package:frontend/controllers/language_controller.dart';
 import 'package:frontend/controllers/polygon_controller.dart';
+import 'package:frontend/controllers/user_controller.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController {
@@ -9,6 +10,7 @@ class ChatController extends GetxController {
   final polygon = Get.put(PolygonController());
   final MessagesList = [].obs;
   final chat = Get.put(LanguageController());
+  final user = Get.put(UserController());
 
   void sendTextMessage(String text) async {
     final ndvi = polygon.ndvi.value.mean;
@@ -19,7 +21,7 @@ class ChatController extends GetxController {
     final ndwi = polygon.ndwi.value.mean;
 
     try {
-      MessagesList.add({"author": "user", "content": text});
+      MessagesList.add({"author": "${user.user.value.name}", "content": text});
       //add api bearer token in headers
 
       _dio.options.headers["content-Type"] = "application/json";
