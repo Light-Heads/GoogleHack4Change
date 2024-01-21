@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_octicons/flutter_octicons.dart';
-import 'package:frontend/controllers/cart_controller.dart';
 import 'package:frontend/controllers/products_controller.dart';
 import 'package:frontend/models/productmodel.dart';
 import 'package:frontend/pallete.dart';
@@ -8,14 +7,14 @@ import 'package:get/get.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:line_icons/line_icons.dart';
 
-class ProductListing extends StatefulWidget {
-  const ProductListing({Key? key}) : super(key: key);
+class CartScreen extends StatefulWidget {
+  const CartScreen({Key? key}) : super(key: key);
 
   @override
-  State<ProductListing> createState() => _ProductListingState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _ProductListingState extends State<ProductListing> {
+class _CartScreenState extends State<CartScreen> {
   final ProductController product = Get.put(ProductController());
   TextEditingController searchController = TextEditingController();
   String selectedSortOption = 'Default'; // Default is just a placeholder
@@ -23,35 +22,21 @@ class _ProductListingState extends State<ProductListing> {
   @override
   Widget build(BuildContext context) {
     final productList = product.products.value;
-    final cartController = Get.put(CartController());
     var size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product Listing'),
+        title: Text('Cart'),
         actions: [
           IconButton(
             onPressed: () {
               // Implement search functionality here
               // You may need to update your ProductController to handle search
             },
-            icon: Stack(
+            icon: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                //add numer of items
-                Container(
-                  margin: EdgeInsets.only(left: 30),
-                  child: Obx(() => Text(
-                        cartController.cartItems.length.toString(),
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      )),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(Icons.shopping_cart_outlined),
-                  ],
-                ),
+                Icon(Icons.shopping_cart_outlined),
               ],
             ),
           ),
@@ -204,26 +189,9 @@ class _ProductListingState extends State<ProductListing> {
                                             Text('${productItem.brand ?? ''}')),
                                   ],
                                 ),
-                                Obx(()=>
-                                (cartController.cartItems
-                                            .where((item) =>
-                                                item.title ==
-                                                productItem.title)
-                                            .length >
-                                        0)
-                                    ? IconButton(
-                                        onPressed: () {
-                                          cartController.addOrRemovefromCart(
-                                              productItem);
-                                        },
-                                        icon: Icon(LineIcons.trash, color: const Color.fromARGB(255, 219, 215, 215),))
-                                    :
                                 IconButton(
-                                    onPressed: () {
-                                      cartController.addOrRemovefromCart(
-                                          productItem);
-                                    },
-                                    icon: Icon(LineIcons.addToShoppingCart, color: Pallete.greenColor)))
+                                    onPressed: () {},
+                                    icon: Icon(LineIcons.addToShoppingCart))
                               ],
                             ),
                           ),

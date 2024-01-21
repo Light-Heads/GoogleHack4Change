@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/controllers/user_controller.dart';
 import 'package:frontend/pallete.dart';
+import 'package:get/get.dart';
 
 Container MessageTile(Size size, Map<String, dynamic> chatMap, DateTime date) {
+  final user = Get.put(UserController());
   return Container(
     margin: EdgeInsets.only(
         bottom: size.height * 0.025,
@@ -16,10 +19,17 @@ Container MessageTile(Size size, Map<String, dynamic> chatMap, DateTime date) {
           height: size.width * 0.1,
           decoration: BoxDecoration(
             color: Pallete.whiteColor,
-            // image: DecorationImage(
-            //   image: NetworkImage(chatMap['senderPhotoUrl']),
-            //   fit: BoxFit.cover,
-            // ),
+            image: (chatMap['author'] != 'bot')
+                ? DecorationImage(
+                    image: NetworkImage(user.user.value.image ?? ""),
+                    fit: BoxFit.cover,
+                  )
+                : DecorationImage(
+                    image: NetworkImage(
+                      'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png',
+                    ),
+                    fit: BoxFit.cover,
+                  ),
             borderRadius: BorderRadius.circular(100),
           ),
         ),

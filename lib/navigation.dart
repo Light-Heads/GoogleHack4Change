@@ -20,11 +20,16 @@ class Navigation extends StatefulWidget {
   State<Navigation> createState() => _NavigationState();
 }
 
+
+
 class _NavigationState extends State<Navigation> {
   final controller = Get.put(NavigationController());
   final user = Get.put(UserController());
+
+
   @override
   Widget build(BuildContext context) {
+    
     var pages = [
       const Homepage(),
       const MobileChatScreen(),
@@ -59,7 +64,6 @@ class _NavigationState extends State<Navigation> {
               body: Stack(
                 children: [
                   pages[controller.tabIndex],
-                  (controller.tabIndex!=1)?
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
@@ -83,6 +87,7 @@ class _NavigationState extends State<Navigation> {
                           ),
                           color: Pallete.whiteColor,
                         ),
+                        height: size.height * 0.07,
                         width: size.width,
                         child: BottomNavigationBar(
                           type: BottomNavigationBarType.fixed,
@@ -103,7 +108,7 @@ class _NavigationState extends State<Navigation> {
                         ),
                       ),
                     ),
-                  ):Container(),
+                  )
                 ],
               )),
         ),
