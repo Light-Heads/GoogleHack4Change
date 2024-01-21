@@ -84,6 +84,14 @@
     "@waterStress": {
         "description": "Water Stress"
     },
+    "nitrogen": "Nitrogen",
+    "@nitrogen": {
+        "description": "Nitrogen"
+    },
+    "maturity": "Maturity",
+    "@maturity": {
+        "description": "Maturity"
+    },
     "low": "Low",
     "@low": {
         "description": "Low"
@@ -119,5 +127,13 @@
     "vegHealthImprove": "Vegetation health needs improvement. Consider nutrient management.",
     "@vegHealthImprove": {
         "description": "Vegetation Health Improve"
+    },
+    "actions": "Actions",
+    "@actions": {
+        "description": "Actions"
+    },
+    "waterlimit": "Water Limit",
+    "@waterlimit": {
+        "description": "Water Limit"
     }
 }
