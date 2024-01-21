@@ -167,11 +167,11 @@ class Insights extends StatelessWidget {
     }
   }
 
-  String interpretCropHealth(String healthScore) {
+  String interpretCropHealth(BuildContext context, String healthScore) {
     if (healthScore == "High") {
-      return "Vegetation health is good.";
+      return AppLocalizations.of(context)!.vegHealthGood;
     } else {
-      return "Vegetation health needs improvement. Consider nutrient management.";
+      return AppLocalizations.of(context)!.vegHealthImprove;
     }
   }
 
@@ -188,19 +188,19 @@ class Insights extends StatelessWidget {
     }
   }
 
-  String interpretNitrogenLevel(String nitrogenLevel) {
+  String interpretNitrogenLevel(BuildContext context, String nitrogenLevel) {
     if (nitrogenLevel == "High") {
-      return "Nitrogen levels are adequate for current crop conditions.";
+      return AppLocalizations.of(context)!.nitAdequate;
     } else {
-      return "Nitrogen levels are low. Consider applying nitrogen-rich fertilizers.";
+      return AppLocalizations.of(context)!.nitLow;
     }
   }
 
-  String interpretCropMaturity(String cropMaturity) {
+  String interpretCropMaturity(BuildContext context, String cropMaturity) {
     if (cropMaturity == "High") {
-      return "Nitrogen levels are adequate for current crop conditions.";
+      return AppLocalizations.of(context)!.nitAdequate;
     } else {
-      return "Nitrogen levels are low. Consider applying nitrogen-rich fertilizers.";
+      return AppLocalizations.of(context)!.nitLow;
     }
   }
 
@@ -220,7 +220,7 @@ class Insights extends StatelessWidget {
           SizedBox(height: 15,),
           ListTile(
             title: Text('Crop Health: ${health}'),
-            subtitle: Text(interpretCropHealth(health)),
+            subtitle: Text(interpretCropHealth(context, health)),
             trailing: Container(
               width: 12,
               height: 12,
@@ -246,7 +246,7 @@ class Insights extends StatelessWidget {
           SizedBox(height: 15,),
           ListTile(
             title: Text('Nitrogen Level: ${nitrogen}'),
-            subtitle: Text(interpretNitrogenLevel(nitrogen)),
+            subtitle: Text(interpretNitrogenLevel(context, nitrogen)),
             trailing: Container(
               width: 12,
               height: 12,
@@ -259,7 +259,7 @@ class Insights extends StatelessWidget {
           SizedBox(height: 15,),
           ListTile(
             title: Text('Crop Maturity: ${nitrogen}'),
-            subtitle: Text(interpretNitrogenLevel(nitrogen)),
+            subtitle: Text(interpretNitrogenLevel(context, nitrogen)),
             trailing: Container(
               width: 12,
               height: 12,

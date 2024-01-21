@@ -83,5 +83,41 @@
     "waterStress": "Water Stress",
     "@waterStress": {
         "description": "Water Stress"
+    },
+    "low": "Low",
+    "@low": {
+        "description": "Low"
+    },
+    "medium": "Medium",
+    "@medium": {
+        "description": "Medium"
+    },
+    "high": "High",
+    "@high": {
+        "description": "High"
+    },
+    "good"  : "Good",
+    "@good": {
+        "description": "Good"
+    },
+    "nitGood": "Nitrogen levels are Good",
+    "@nitGood": {
+        "description": "Nitrogen Good"
+    },
+    "nitAdequate": "Nitrogen levels are adequate for current crop conditions.",
+    "@nitAdequate": {
+        "description": "Nitrogen Adequate"
+    },
+    "nitLow": "Nitrogen levels are low. Consider applying nitrogen-rich fertilizers.",
+    "@nitLow": {
+        "description": "Nitrogen Low"
+    },
+    "vegHealthGood": "Vegetation Health is Good",
+    "@vegHealthGood": {
+        "description": "Vegetation Health Good"
+    },
+    "vegHealthImprove": "Vegetation health needs improvement. Consider nutrient management.",
+    "@vegHealthImprove": {
+        "description": "Vegetation Health Improve"
     }
 }
