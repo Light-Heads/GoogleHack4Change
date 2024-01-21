@@ -49,9 +49,10 @@ class _HomepageState extends State<Homepage> {
         String nitrogen =
             calculateNitrogen(polygon.ndvi.value.mean ?? 0.toDouble());
         String health =
-            calculateHealth(polygon.ndvi.value.mean ?? 0.toDouble());
+            calculateHealth(context, polygon.ndvi.value.mean ?? 0.toDouble());
 
         String waterStress = calculateWaterStress(
+            context,
             polygon.ndvi.value.mean ?? 0.toDouble(),
             polygon.dswi.value.mean ?? 0.toDouble());
         return (controller.isDataLoading.value ||
@@ -264,7 +265,7 @@ class _HomepageState extends State<Homepage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Current Conditions",
+                                      AppLocalizations.of(context)!.current,
                                       style: h1,
                                     ),
                                     SizedBox(
@@ -329,11 +330,14 @@ class _HomepageState extends State<Homepage> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: size.height * 0.01,
-                                    ),
+                                  
                                     Center(
-                                        child: Text("Nitrogen leves are Good")),
+                                        child: Text(AppLocalizations.of(context)!
+                                          .nitGood,
+                                          style: h1.copyWith(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 14),
+                                        )),
                                     SizedBox(
                                       height: size.height * 0.02,
                                     ),
