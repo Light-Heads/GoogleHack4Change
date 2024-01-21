@@ -6,7 +6,6 @@ import '../../pallete.dart';
 import '../../theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class SugesstionScreen extends StatefulWidget {
   final String nitrogen;
   final String health;
@@ -55,7 +54,7 @@ class _SugesstionScreenState extends State<SugesstionScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                  AppLocalizations.of(context)!.suggestions,
+                      AppLocalizations.of(context)!.suggestions,
                       style: h1.copyWith(fontSize: 34, color: Colors.black),
                     ),
                     SizedBox(
@@ -79,8 +78,14 @@ class _SugesstionScreenState extends State<SugesstionScreen> {
                           fontWeight: FontWeight.w800,
                           color: Pallete.greenColor),
                     ),
-                    SizedBox(height: size.height*0.03,),
-                    Insights(poly: polygon, nitrogen: widget.nitrogen, health: widget.health, waterStresss: widget.waterStress)
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    Insights(
+                        poly: polygon,
+                        nitrogen: widget.nitrogen,
+                        health: widget.health,
+                        waterStresss: widget.waterStress)
                   ],
                 ),
               ),
@@ -175,10 +180,10 @@ class Insights extends StatelessWidget {
     }
   }
 
-  String interpretWaterStress(String waterStressScore) {
+  String interpretWaterStress(BuildContext context, waterStressScore) {
     switch (waterStressScore) {
       case "Low":
-        return "Water stress is within acceptable levels.";
+        return AppLocalizations.of(context)!.waterlimit;
       case "Medium":
         return "Moderate water stress detected. Consider adjusting irrigation.";
       case "High":
@@ -213,13 +218,15 @@ class Insights extends StatelessWidget {
         children: [
           ListTile(
             title: Text(
-              'Actions',
+              AppLocalizations.of(context)!.actions,
               style: h1.copyWith(fontWeight: FontWeight.w700),
             ),
           ),
-          SizedBox(height: 15,),
+          SizedBox(
+            height: 15,
+          ),
           ListTile(
-            title: Text('Crop Health: ${health}'),
+            title: Text('`${AppLocalizations.of(context)!.health}: `${health}'),
             subtitle: Text(interpretCropHealth(context, health)),
             trailing: Container(
               width: 12,
@@ -230,10 +237,13 @@ class Insights extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 15,),
+          SizedBox(
+            height: 15,
+          ),
           ListTile(
-            title: Text('Water Stress: ${waterStresss}'),
-            subtitle: Text(interpretWaterStress(waterStresss)),
+            title: Text(
+                '`${AppLocalizations.of(context)!.waterStress}: ${waterStresss}'),
+            subtitle: Text(interpretWaterStress(context, waterStresss)),
             trailing: Container(
               width: 12,
               height: 12,
@@ -243,9 +253,12 @@ class Insights extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 15,),
+          SizedBox(
+            height: 15,
+          ),
           ListTile(
-            title: Text('Nitrogen Level: ${nitrogen}'),
+            title:
+                Text('`${AppLocalizations.of(context)!.nitrogen}: ${nitrogen}'),
             subtitle: Text(interpretNitrogenLevel(context, nitrogen)),
             trailing: Container(
               width: 12,
@@ -256,9 +269,12 @@ class Insights extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 15,),
+          SizedBox(
+            height: 15,
+          ),
           ListTile(
-            title: Text('Crop Maturity: ${nitrogen}'),
+            title: Text(
+                '`${AppLocalizations.of(context)!.maturity}`: ${nitrogen}'),
             subtitle: Text(interpretNitrogenLevel(context, nitrogen)),
             trailing: Container(
               width: 12,
