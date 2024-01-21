@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/controllers/commodity_controller.dart';
 import 'package:frontend/controllers/location_controller.dart';
 import 'package:frontend/controllers/polygon_controller.dart';
+import 'package:frontend/controllers/services_controller.dart';
 import 'package:frontend/controllers/user_controller.dart';
 import 'package:frontend/controllers/weather_controller.dart';
 import 'package:frontend/core/buttons.dart';
@@ -40,12 +41,13 @@ class _HomepageState extends State<Homepage> {
     final controller = Get.put(CommodityController());
     final location = Get.put(LocationController());
     final weather = Get.put(WeatherController());
-    num c = 273.15;
-    final celciusweather = weather.weather.value.main?.temp ?? 0;
-    num finalweathertemp = celciusweather - c;
+    final services = Get.put(ServicesController());
 
     return SafeArea(
       child: Scaffold(body: Obx(() {
+        num c = 273.15;
+        final celciusweather = weather.weather.value.main?.temp ?? 0;
+        num finalweathertemp = celciusweather - c;
         String nitrogen =
             calculateNitrogen(polygon.ndvi.value.mean ?? 0.toDouble());
         String health =
@@ -330,14 +332,13 @@ class _HomepageState extends State<Homepage> {
                                         ],
                                       ),
                                     ),
-                                  
                                     Center(
-                                        child: Text(AppLocalizations.of(context)!
-                                          .nitGood,
-                                          style: h1.copyWith(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: 14),
-                                        )),
+                                        child: Text(
+                                      AppLocalizations.of(context)!.nitGood,
+                                      style: h1.copyWith(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 14),
+                                    )),
                                     SizedBox(
                                       height: size.height * 0.02,
                                     ),
@@ -397,6 +398,104 @@ class _HomepageState extends State<Homepage> {
                             ),
                             SizedBox(
                               height: size.height * 0.03,
+                            ),
+                            Container(
+                              width: size.width * 0.9,
+                              decoration: ShapeDecoration(
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                shadows: [
+                                  BoxShadow(
+                                    color: Color(0x3F000000),
+                                    blurRadius: 34,
+                                    offset: Offset(-2, 4),
+                                    spreadRadius: 0,
+                                  )
+                                ],
+                              ),
+                              // height: size.height * 0.3,
+                              padding: const EdgeInsets.all(28.0),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Featured',
+                                      style: h1,
+                                    ),
+                                    SizedBox(
+                                      height: size.height * 0.01,
+                                    ),
+                                    Obx(
+                                      () => GridView.builder(
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 4,
+                                          crossAxisSpacing: 10,
+                                          mainAxisSpacing: 12,
+                                          childAspectRatio: 0.8,
+                                        ),
+                                        itemCount: services.services.length,
+                                        itemBuilder: (context, index) {
+                                          return Container(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  width: size.width * 0.13,
+                                                  height: size.height * 0.05,
+                                                  child: IconButton(
+                                                    onPressed: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  services.services[
+                                                                              index]
+                                                                          [
+                                                                          'onTap']
+                                                                      as Widget));
+                                                    },
+                                                    icon: Icon(
+                                                      services.services[index]
+                                                          ['icon'] as IconData?,
+                                                      size: 30,
+                                                      color: Pallete.greenColor,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                    width: size.width * 0.14,
+                                                    child: Center(
+                                                      child: Text(
+                                                        services.services[index]
+                                                            ['name'] as String,
+                                                        maxLines: 2,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            fontSize: 9,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            letterSpacing: 0.5),
+                                                      ),
+                                                    ))
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                            SizedBox(
+                              height: size.height * 0.15,
                             ),
                           ],
                         ),
