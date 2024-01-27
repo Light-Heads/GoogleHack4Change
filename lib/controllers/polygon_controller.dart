@@ -25,7 +25,7 @@ class PolygonController extends GetxController {
   var ndwi = PolyStatsModel().obs;
 
   createPolygon(List<LatLng> coordinates) async {
-    try {
+    
       var res = await dio.post(
           'http://api.agromonitoring.com/agro/1.0/polygons?appid=${agroMonitoringAPIKey}',
           data: {
@@ -41,10 +41,13 @@ class PolygonController extends GetxController {
               }
             }
           });
+      if (res.statusCode != 200 || res.statusCode != 201) {
+        print("something went wrong in creating polygon ${res.data}");
+      }
       polygondata.value = PolygonModel.fromMap(res.data);
-    } catch (e) {
-      print(e);
-    }
+
+      print(polygondata.value.id);
+
   }
 
   getImage(String polygonId) async {
@@ -58,6 +61,7 @@ class PolygonController extends GetxController {
   }
 
   getData(String polygonId) async {
+    print("Polygon ID: $polygonId");
     getSoilMoisture(polygonId);
     getUVIndex(polygonId);
     getSatelliteImagery(polygonId);

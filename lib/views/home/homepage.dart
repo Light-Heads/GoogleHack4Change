@@ -42,7 +42,7 @@ class _HomepageState extends State<Homepage> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero).then((value) async {
-      await polygon.getSatelliteImagery(user.user.value.polygonId ?? "");
+      await polygon.getData(user.user.value.polygonId ?? "");
       // await product.getAllProducts();
     });
   }
